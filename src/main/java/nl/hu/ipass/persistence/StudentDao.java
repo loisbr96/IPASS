@@ -1,16 +1,13 @@
 package nl.hu.ipass.persistence;
 
-import nl.hu.ipass.domein.Slaapplek;
-import nl.hu.ipass.domein.Student;
-
-import java.util.List;
+import nl.hu.ipass.domain.Student;
 
 public interface StudentDao {
     public Student save(Student student);
 
     public Student findById(int id);
 
-    public Student findEmailForWachtwoord(String email, String wachtwoord);
+    public Student findByEmailAndWachtwoord(String email, String wachtwoord);
 
     public boolean update(Student student);
 

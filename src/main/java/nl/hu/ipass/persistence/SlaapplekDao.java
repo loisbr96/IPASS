@@ -1,11 +1,9 @@
 package nl.hu.ipass.persistence;
 
-import nl.hu.ipass.domein.Huis;
-import nl.hu.ipass.domein.Slaapplek;
-import nl.hu.ipass.domein.Student;
+import nl.hu.ipass.domain.Huis;
+import nl.hu.ipass.domain.Slaapplek;
+import nl.hu.ipass.domain.Student;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public interface SlaapplekDao {

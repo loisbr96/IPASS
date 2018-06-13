@@ -1,4 +1,6 @@
-package nl.hu.ipass.domein;
+package nl.hu.ipass.domain;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ public class Student {
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
         this.email = email;
-        this.wachtwoord = wachtwoord;
+        this.wachtwoord = DigestUtils.sha256Hex(wachtwoord);
     }
 
     public Student(int id, String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord){
@@ -49,6 +51,10 @@ public class Student {
         return email;
     }
 
+    public String getWachtwoord(){
+        return wachtwoord;
+    }
+
     public void setVoornaam(String voornaam){
         this.voornaam = voornaam;
     }
@@ -66,13 +72,13 @@ public class Student {
     }
 
     public void setWachtwoord(String oudWachtwoord, String nieuwWachtwoord){
-        if(this.wachtwoord.equals(oudWachtwoord)){
-            this.wachtwoord = nieuwWachtwoord;
+        if(this.wachtwoord.equals(DigestUtils.sha256Hex(oudWachtwoord))){
+            this.wachtwoord = DigestUtils.sha256Hex(nieuwWachtwoord);
         }
     }
 
     public boolean wachtwoordCorrect(String wachtwoord){
-        if(this.wachtwoord.equals(wachtwoord)){
+        if(this.wachtwoord.equals(DigestUtils.sha256Hex(wachtwoord))){
             return true;
         }else{
             return false;

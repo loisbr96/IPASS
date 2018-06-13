@@ -1,4 +1,4 @@
-package nl.hu.ipass.domein;
+package nl.hu.ipass.domain;
 
 import java.util.ArrayList;
 

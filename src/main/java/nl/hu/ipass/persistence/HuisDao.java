@@ -1,13 +1,11 @@
 package nl.hu.ipass.persistence;
 
-import nl.hu.ipass.domein.Huis;
+import nl.hu.ipass.domain.Huis;
 
 public interface HuisDao {
-    public Huis save(Huis student);
+    public Huis save(Huis huis);
 
     public Huis findById(int id);
 
-    public boolean update(Huis student);
-
-    public boolean delete(Huis student);
+    public boolean delete(Huis huis);
 }
