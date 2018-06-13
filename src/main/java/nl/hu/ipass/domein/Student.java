@@ -1,15 +1,17 @@
 package nl.hu.ipass.domein;
 
+import java.util.ArrayList;
+
 public class Student {
-    private int persoonId;
+    private int id;
     private String voornaam;
     private String tussenvoegsel;
     private String achternaam;
     private String email;
-    protected String wachtwoord;
+    private String wachtwoord;
+    private ArrayList<Slaapplek> alleSlaapplekken = new ArrayList<>();
 
-    public Student(int persoonId, String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord){
-        this.persoonId = persoonId;
+    public Student(String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord){
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
@@ -17,10 +19,14 @@ public class Student {
         this.wachtwoord = wachtwoord;
     }
 
-    /*constructor 2 toevoegen*/
+    public Student(int id, String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord){
+        this(voornaam, tussenvoegsel, achternaam, email,wachtwoord);
+        this.id = id;
 
-    public int getPersoonId(){
-        return persoonId;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getVoornaam(){
@@ -71,5 +77,13 @@ public class Student {
         }else{
             return false;
         }
+    }
+
+    public ArrayList<Slaapplek> getAlleSlaapplekken(){
+        return alleSlaapplekken;
+    }
+
+    public void setAlleSlaapplekken(ArrayList<Slaapplek> alleSlaapplekken){
+        this.alleSlaapplekken = alleSlaapplekken;
     }
 }
