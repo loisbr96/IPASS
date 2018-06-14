@@ -12,11 +12,11 @@ public interface SlaapplekDao {
 
     public List<Slaapplek> findByDatum(String datum);
 
-    public List<Slaapplek> findByHuis(Huis huis);
+//    public List<Slaapplek> findByHuis(Huis huis);
 
-    public List<Slaapplek> findByStudent(Student student);
+//    public List<Slaapplek> findByStudent(Student student);
 
-    public Slaapplek findByStudentAndDatum(Student student, String datum);
+//    public Slaapplek findByStudentAndDatum(Student student, String datum);
 
     public List<Slaapplek> findByHuisAndDatum(Huis huis, String datum);
 
