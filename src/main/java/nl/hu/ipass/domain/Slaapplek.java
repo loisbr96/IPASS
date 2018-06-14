@@ -1,29 +1,37 @@
 package nl.hu.ipass.domain;
 
 public class Slaapplek {
-    private String status;
+    private int id;
     private String datum;
     private Huis huis;
     private Student student;
 
-    public Slaapplek(String status, String datum){
-        this.status = status;
+    public Slaapplek(int id, String datum, Huis huis, Student student ){
+        this.id = id;
         this.datum = datum;
-    }
-
-    public String getStatus(){
-        return status;
+        this.huis = huis;
+        this.student = student;
     }
 
     public String getDatum(){
         return datum;
     }
 
+    public int getId(){
+        return id;
+    }
+
     public void setDatum(String datum){
         this.datum = datum;
     }
 
-    public void setStatus(String status){
-        this.status = status;
+    public Huis getHuis(){
+        return huis;
     }
+
+    public Student getStudent(){
+        return student;
+    }
+
+
 }
