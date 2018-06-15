@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/slaapplek")
 @RolesAllowed("student")
@@ -36,9 +37,8 @@ public class SlaapplekResource {
     }
 
     @PUT
-    @Path("/{id}")
-    public Response updateSlaapplek(@PathParam("id") int id,
-                                    @FormParam("datum") String datum,
+    @Path("/{datum}")
+    public Response updateSlaapplek(@PathParam("datum") String datum,
                                     @FormParam("huis") int huisId,
                                     @Context ContainerRequestContext context){
         MySecurityContext msc = (MySecurityContext) context.getSecurityContext();
@@ -49,18 +49,20 @@ public class SlaapplekResource {
         if(huis == null){
             return Response.status(404).build();
         } else{
-            Slaapplek newSlaapplek = service.save(new Slaapplek(datum, huis, student));
-            return Response.ok(newSlaapplek).build();
+            Slaapplek slaapplek = service.findByStudentAndDatum(student, datum);
+            slaapplek.setHuis(huis);
+            service.update(slaapplek);
+            return Response.ok().build();
         }
     }
 
     @GET
     @Path("/huis/{id}/{datum}")
-    public Slaapplek getHuisAndDatum(@PathParam("id") int huisId,
-                                     @PathParam("datum") String datum){
+    public List<Slaapplek> getHuisAndDatum(@PathParam("id") int huisId,
+                                           @PathParam("datum") String datum){
         Huis huis = ServiceProvider.getHuisService().findById(huisId);
 
-        return service.findByHuisAndDatum(huis,datum).get(0);
+        return service.findByHuisAndDatum(huis,datum);
     }
 
     @GET

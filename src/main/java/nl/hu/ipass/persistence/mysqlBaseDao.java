@@ -10,7 +10,7 @@ public class mysqlBaseDao {
 
         try{
             InitialContext ic = new InitialContext();
-            DataSource ds = (DataSource) ic.lookup("java:comp/env/jdbc/Mysql");
+            DataSource ds = (DataSource) ic.lookup("java:comp/env/jdbc/MysqlDS");
 
             result = ds.getConnection();;
         } catch (Exception e){

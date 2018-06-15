@@ -2,7 +2,8 @@
 <Context>
     <Resource name="jdbc/MysqlDS"
               url="jdbc:mysql://localhost:3306/IPASS"
-              driverClassName="com.mysql.jdbc.Driver"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              driverClassName="com.mysql.cj.jdbc.Driver"
               auth="Container"
               type="javax.sql.DataSource"
               username="root"

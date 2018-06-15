@@ -24,6 +24,6 @@ public interface SlaapplekDao {
 
     public boolean delete(Slaapplek slaapplek);
 
-    public Slaapplek findById(int id);
+//    public Slaapplek findById(int id);
 
 }

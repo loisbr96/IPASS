@@ -35,9 +35,9 @@ public class SlaapplekService {
 //        return slaapplekDao.findByHuis(huis);
 //    }
 
-    public Slaapplek findById(int id) {
-        return slaapplekDao.findById(id);
-    }
+//    public Slaapplek findById(int id) {
+//        return slaapplekDao.findById(id);
+//    }
 //
 //    public List<Slaapplek> findByStudent(Student student) {
 //        return slaapplekDao.findByStudent(student);

@@ -11,7 +11,7 @@ public class StudentDaoImpl extends mysqlBaseDao implements StudentDao {
     @Override
     public Student save(Student student) {
         try(Connection con = super.getConnection()){
-            PreparedStatement prep = con.prepareStatement("INSERT INTO student(voornaam, tussenvoegsel, achternaam, email, wachtwoord)");
+            PreparedStatement prep = con.prepareStatement("INSERT INTO student(voornaam, tussenvoegsel, achternaam, email, wachtwoord) VALUES (?,?,?,?,?) ");
             prep.setString(1,student.getVoornaam() );
             prep.setString(2,student.getTussenvoegsel() );
             prep.setString(3,student.getAchternaam() );

@@ -4,8 +4,11 @@ import nl.hu.ipass.domain.Student;
 import nl.hu.ipass.services.ServiceProvider;
 import nl.hu.ipass.services.StudentService;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 @Path("/student")
@@ -15,6 +18,7 @@ public class StudentResource {
     StudentService service = ServiceProvider.getStudentService();
 
     @POST
+    @PermitAll
     public Response newStudent(@FormParam("voornaam") String voornaam,
                                 @FormParam("tussenvoegsel") String tussenvoegsel,
                                 @FormParam("achternaam") String achternaam,
@@ -25,19 +29,20 @@ public class StudentResource {
     }
 
     @GET
-    @Path("/{id}")
-    public Student getStudent(@PathParam("id") int id) {
-        return service.findById(id);
+    public Student getStudent(@Context ContainerRequestContext context) {
+        MySecurityContext msc = (MySecurityContext) context.getSecurityContext();
+
+        return service.findById(msc.getId());
     }
 
     @PUT
-    @Path("/{id}")
-    public Response updateStudent(@PathParam("id") int id,
+    public Response updateStudent(@Context ContainerRequestContext context,
                                   @FormParam("voornaam") String voornaam,
                                   @FormParam("tussenvoegsel") String tussenvoegsel,
                                   @FormParam("achternaam") String achternaam,
                                   @FormParam("email") String email){
-        Student student = service.findById(id);
+        MySecurityContext msc = (MySecurityContext) context.getSecurityContext();
+        Student student = service.findById(msc.getId());
         student.setVoornaam(voornaam);
         student.setTussenvoegsel(tussenvoegsel);
         student.setAchternaam(achternaam);
@@ -49,9 +54,9 @@ public class StudentResource {
 
 
     @DELETE
-    @Path("/{id}")
-    public Response deleteStudent(@PathParam("id") int id){
-        Student student = service.findById(id);
+    public Response deleteStudent(@Context ContainerRequestContext context){
+        MySecurityContext msc = (MySecurityContext) context.getSecurityContext();
+        Student student = service.findById(msc.getId());
         if(student == null){
             return Response.status(404).build();
         } else {

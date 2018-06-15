@@ -24,7 +24,7 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
         try(Connection con = super.getConnection()){
             PreparedStatement prep = con.prepareStatement("INSERT INTO slaapplek(datum, huisId, studentId) VALUES(?,?,?)");
             try{
-                DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 Date datum =  df.parse(slaapplek.getDatum());
                 java.sql.Date sqlDatum = new java.sql.Date(datum.getTime());
                 prep.setDate(1, sqlDatum );
@@ -45,18 +45,10 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
     @Override
     public boolean update(Slaapplek slaapplek) {
         try(Connection con = super.getConnection()) {
-            PreparedStatement prep = con.prepareStatement("UPDATE slaapplek SET datum = ?, huisId = ?, studentId = ? WHERE id = ? ");
-            try {
-                DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
-                Date datum = df.parse(slaapplek.getDatum());
-                java.sql.Date sqlDatum = new java.sql.Date(datum.getTime());
-                prep.setDate(1, sqlDatum);
-                prep.setInt(2, slaapplek.getHuis().getId());
-                prep.setInt(3, slaapplek.getStudent().getId());
-                prep.setInt(4, slaapplek.getId());
-            } catch (ParseException pe){
-                System.out.println(pe);
-            }
+            PreparedStatement prep = con.prepareStatement("UPDATE slaapplek SET huisId = ? WHERE datum = STR_TO_DATE(?, '%d-%m-%Y') AND studentId = ?");
+            prep.setInt(1, slaapplek.getHuis().getId());
+            prep.setString(2, slaapplek.getDatum());
+            prep.setInt(3, slaapplek.getStudent().getId());
 
             prep.execute();
             return true;
@@ -69,9 +61,16 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
     @Override
     public boolean delete(Slaapplek slaapplek) {
         try(Connection con = super.getConnection()){
-            PreparedStatement prep = con.prepareStatement("DELETE FROM slaapplek WHERE id = ?");
-
-            prep.setInt(1,slaapplek.getId() );
+            PreparedStatement prep = con.prepareStatement("DELETE FROM slaapplek WHERE studentId = ? AND datum = ?");
+            try{
+                prep.setInt(1,slaapplek.getStudent().getId() );
+                DateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                Date datum = df.parse(slaapplek.getDatum());
+                java.sql.Date sqlDatum = new java.sql.Date(datum.getTime());
+                prep.setDate(2,sqlDatum );
+            } catch (ParseException pe){
+                System.out.println(pe);
+            }
 
             prep.execute();
             return true;
@@ -87,12 +86,12 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
             PreparedStatement prep = con.prepareStatement(query);
             ResultSet rs = prep.executeQuery();
             while (rs.next()){
-                int id = rs.getInt("id");
-                String datum = rs.getString("datum");
+                DateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                String datum = df.format(new Date(rs.getDate("datum").getTime()));
                 Huis huis = ServiceProvider.getHuisService().findById(rs.getInt("huisId"));
                 Student student = ServiceProvider.getStudentService().findById(rs.getInt("studentId"));
 
-                results.add(new Slaapplek(id, datum, huis, student));
+                results.add(new Slaapplek(datum, huis, student));
             }
         }catch (SQLException e){
             System.out.println(e);
@@ -110,10 +109,10 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
 //        return selectSlaapplek("SELECT * FROM slaapplek WHERE huisId = '" + huis.getId() + "'");
 //    }
 
-    @Override
-    public Slaapplek findById(int id) {
-        return selectSlaapplek("SELECT * FROM slaapplek WHERE id = '" + id + "'").get(0);
-    }
+//    @Override
+//    public Slaapplek findById(int id) {
+//        return selectSlaapplek("SELECT * FROM slaapplek WHERE id = " + id).get(0);
+//    }
 
 //    @Override
 //    public List<Slaapplek> findByStudent(Student student) {
@@ -122,12 +121,12 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
 
     @Override
     public List<Slaapplek> findByHuisAndDatum(Huis huis, String datum) {
-        return selectSlaapplek("SELECT * FROM slaapplek WHERE huisId = '" + huis.getId() + "' AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')");
+        return selectSlaapplek("SELECT * FROM slaapplek WHERE huisId = " + huis.getId() + " AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')");
     }
 
     @Override
     public Slaapplek findByStudentAndDatum(Student student, String datum) {
-        return selectSlaapplek("SELECT * FROM slaapplek WHERE studentId = '" + student.getId() + "' AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')").get(0);
+        return selectSlaapplek("SELECT * FROM slaapplek WHERE studentId = " + student.getId() + " AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')").get(0);
     }
 
 }
