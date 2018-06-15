@@ -4,6 +4,8 @@ import nl.hu.ipass.domain.Huis;
 import nl.hu.ipass.persistence.HuisDao;
 import nl.hu.ipass.persistence.HuisDaoImpl;
 
+import java.util.List;
+
 public class HuisService {
     private HuisDao huisDao;
 
@@ -21,6 +23,10 @@ public class HuisService {
 
     public Huis findById(int id){
         return huisDao.findById(id);
+    }
+
+    public List<Huis> findAll(){
+        return huisDao.findAll();
     }
 
 }

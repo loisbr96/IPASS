@@ -82,8 +82,8 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
     }
 
     @Override
-    public List<Slaapplek> findByDatum(String datum) {
-        return selectSlaapplek("SELECT * FROM slaapplek WHERE datum = '" + datum + "'");
+    public Slaapplek findByDatum(String datum) {
+        return selectSlaapplek("SELECT * FROM slaapplek WHERE datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')").get(0);
     }
 
     @Override
@@ -103,12 +103,12 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
 
     @Override
     public List<Slaapplek> findByHuisAndDatum(Huis huis, String datum) {
-        return selectSlaapplek("SELECT * FROM slaapplek WHERE huisId = '" + huis.getId() + "' AND datum = '" + datum + "'");
+        return selectSlaapplek("SELECT * FROM slaapplek WHERE huisId = '" + huis.getId() + "' AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')");
     }
 
     @Override
     public Slaapplek findByStudentAndDatum(Student student, String datum) {
-        return selectSlaapplek("SELECT * FROM slaapplek WHERE studentId = '" + student.getId() + "' AND datum = '" + datum + "'").get(0);
+        return selectSlaapplek("SELECT * FROM slaapplek WHERE studentId = '" + student.getId() + "' AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')").get(0);
     }
 
 }

@@ -6,11 +6,15 @@ public class Slaapplek {
     private Huis huis;
     private Student student;
 
-    public Slaapplek(int id, String datum, Huis huis, Student student ){
-        this.id = id;
+    public Slaapplek(String datum, Huis huis, Student student ){
         this.datum = datum;
         this.huis = huis;
         this.student = student;
+    }
+
+    public Slaapplek(int id, String datum, Huis huis, Student student ){
+        this(datum, huis, student);
+        this.id = id;
     }
 
     public String getDatum(){

@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HuisDaoImpl extends mysqlBaseDao implements HuisDao {
     @Override
@@ -53,8 +55,32 @@ public class HuisDaoImpl extends mysqlBaseDao implements HuisDao {
             System.out.println(e);
             return null;
         }
-
     }
+
+    @Override
+    public List<Huis> findAll(){
+        List<Huis> results = new ArrayList<Huis>();
+        try(Connection con = super.getConnection()){
+            PreparedStatement prep = con.prepareStatement("SELECT * FROM huis");
+            ResultSet resultSet = prep.executeQuery();
+
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String naam = resultSet.getString("naam");
+                String straatnaam = resultSet.getString("straatnaam");
+                int huisnummer = resultSet.getInt("huisnummer");
+                String postcode = resultSet.getString("postcode");
+                String plaatsnaam = resultSet.getString("plaatsnaam");
+
+                results.add(new Huis(id, naam, straatnaam,huisnummer ,postcode ,plaatsnaam ));
+            }
+        } catch (SQLException e){
+            System.out.println(e);
+        }
+        return results;
+    }
+
+
 
 
 }

@@ -10,13 +10,13 @@ public interface SlaapplekDao {
 
     public Slaapplek save(Slaapplek slaapplek);
 
-    public List<Slaapplek> findByDatum(String datum);
+//    public Slaapplek findByDatum(String datum);
 
 //    public List<Slaapplek> findByHuis(Huis huis);
 
 //    public List<Slaapplek> findByStudent(Student student);
 
-//    public Slaapplek findByStudentAndDatum(Student student, String datum);
+    public Slaapplek findByStudentAndDatum(Student student, String datum);
 
     public List<Slaapplek> findByHuisAndDatum(Huis huis, String datum);
 

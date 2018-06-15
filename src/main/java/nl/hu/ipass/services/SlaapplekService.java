@@ -27,9 +27,9 @@ public class SlaapplekService {
         return slaapplekDao.delete(slaapplek);
     }
 
-    public List<Slaapplek> findByDatum(String datum){
-        return slaapplekDao.findByDatum(datum);
-    }
+//    public Slaapplek findByDatum(String datum){
+//        return slaapplekDao.findByDatum(datum);
+//    }
 
 //    public List<Slaapplek> findByHuis(Huis huis) {
 //        return slaapplekDao.findByHuis(huis);
@@ -47,8 +47,8 @@ public class SlaapplekService {
         return slaapplekDao.findByHuisAndDatum(huis,datum);
     }
 
-//    public Slaapplek findByStudentAndDatum(Student student, String datum) {
-//        return slaapplekDao.findByStudentAndDatum(student,datum);
-//    }
+    public Slaapplek findByStudentAndDatum(Student student, String datum) {
+        return slaapplekDao.findByStudentAndDatum(student,datum);
+    }
 
 }

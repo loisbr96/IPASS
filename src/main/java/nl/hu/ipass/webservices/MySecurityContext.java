@@ -12,16 +12,15 @@ public class MySecurityContext implements SecurityContext {
     public MySecurityContext(String email, int id, boolean isSecure) {
         this.email = email;
         this.id = id;
-        this.role = "student";
+        if(id > 1){
+            this.role = "student";
+        }
     }
 
     public Principal getUserPrincipal() {
         return new Principal() {
             public String getName() {
                 return email;
-            }
-            public int getId(){
-                return id;
             }
         };
     }
