@@ -1,0 +1,26 @@
+body{
+    background: #fffffd ; /*bright white*/
+    margin: 25px;
+
+}
+
+#login{
+    background: #789440; /*Green*/
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    border: 2px solid #a9a9a9; /*Darkgrey*/
+    text-align: center;
+
+}
+
+#loginButton{
+    background: #a9a9a9;
+    margin: 10px;
+    border: 1px solid #000000;
+    color: #000000; /*black*/
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}

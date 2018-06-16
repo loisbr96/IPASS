@@ -6,6 +6,7 @@ import nl.hu.ipass.persistence.HuisDaoImpl;
 
 import java.util.List;
 
+/*Deze service geeft het resultaat van de dao*/
 public class HuisService {
     private HuisDao huisDao;
 

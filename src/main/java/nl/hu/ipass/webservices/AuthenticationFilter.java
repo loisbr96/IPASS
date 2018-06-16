@@ -20,7 +20,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException{
         boolean isSecure = requestContext.getSecurityContext().isSecure();
 
-// Users are treated as guests, unless a valid JWT is provided
+        /*Gebruiker worden behandeld als gast, behalve als er een geldig JWT is gegeven: */
         MySecurityContext msc = new MySecurityContext("guest", -1, isSecure);
 
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
@@ -29,7 +29,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             String token = authHeader.substring("Bearer".length()).trim();
 
             try {
-// Validate the token
+                /*Valideren van het token: */
                 JwtParser parser = Jwts.parser().setSigningKey(AuthenticationResource.key);
                 Claims claims = parser.parseClaimsJws(token).getBody();
 
@@ -42,7 +42,5 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             }
         }
         requestContext.setSecurityContext(msc);
-
-
     }
 }

@@ -11,8 +11,9 @@ public class Student {
     private String achternaam;
     private String email;
     private String wachtwoord;
-    private ArrayList<Slaapplek> alleSlaapplekken = new ArrayList<>();
+    private ArrayList<Slaapplek> alleSlaapplekken = new ArrayList<>(); /*Relatie tussen Student en Slaapplek*/
 
+    /*Constructor zonder id*/
     public Student(String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord){
         this.voornaam = voornaam;
         this.tussenvoegsel = tussenvoegsel;
@@ -21,12 +22,13 @@ public class Student {
         this.wachtwoord = DigestUtils.sha256Hex(wachtwoord);
     }
 
+    /*Constructor met id d.m.v. constructorchaining*/
     public Student(int id, String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord){
         this(voornaam, tussenvoegsel, achternaam, email,wachtwoord);
         this.id = id;
-
     }
 
+    /*Getters:*/
     public int getId(){
         return id;
     }
@@ -44,7 +46,11 @@ public class Student {
     }
 
     public String getVolledigeNaam(){
-        return voornaam + tussenvoegsel + achternaam;
+        if(tussenvoegsel.equals("")){
+            return voornaam + " " + achternaam;
+        } else{
+            return voornaam + " " + tussenvoegsel + " " + achternaam;
+        }
     }
 
     public String getEmail(){
@@ -55,6 +61,7 @@ public class Student {
         return wachtwoord;
     }
 
+    /*Setters:*/
     public void setVoornaam(String voornaam){
         this.voornaam = voornaam;
     }
@@ -77,6 +84,7 @@ public class Student {
         }
     }
 
+    /*Methode om te controleren of het wachtwoord correct is:*/
     public boolean wachtwoordCorrect(String wachtwoord){
         if(this.wachtwoord.equals(DigestUtils.sha256Hex(wachtwoord))){
             return true;
@@ -85,6 +93,7 @@ public class Student {
         }
     }
 
+    /*Getter en setter voor de Arraylist alleSlaapplekken:*/
     public ArrayList<Slaapplek> getAlleSlaapplekken(){
         return alleSlaapplekken;
     }

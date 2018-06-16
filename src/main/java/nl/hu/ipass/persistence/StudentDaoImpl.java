@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StudentDaoImpl extends mysqlBaseDao implements StudentDao {
+
+    /*Methode om een nieuwe student toe te voegen: */
     @Override
     public Student save(Student student) {
         try(Connection con = super.getConnection()){
@@ -26,6 +28,7 @@ public class StudentDaoImpl extends mysqlBaseDao implements StudentDao {
         }
     }
 
+    /*Methode om van een bestaande student de gegevens te wijzigen */
     @Override
     public boolean update(Student student) {
         try(Connection con = super.getConnection()){
@@ -46,6 +49,7 @@ public class StudentDaoImpl extends mysqlBaseDao implements StudentDao {
         }
     }
 
+    /*Methode om een student uit de database te verwijderen: */
     @Override
     public boolean delete(Student student) {
         try(Connection con = super.getConnection()){
@@ -61,6 +65,7 @@ public class StudentDaoImpl extends mysqlBaseDao implements StudentDao {
         }
     }
 
+    /*Methode om via een id van de student alle gegevens te verkrijgen van die student: */
     @Override
     public Student findById(int id) {
         try(Connection con = super.getConnection()) {
@@ -74,9 +79,9 @@ public class StudentDaoImpl extends mysqlBaseDao implements StudentDao {
             System.out.println(e);
             return null;
         }
-
     }
 
+    /*Methode voor het inloggen. Er worden gecontroleerd of de email en wachtwoord samen overeen komen. */
     @Override
     public Student findByEmailAndWachtwoord(String email, String wachtwoord) {
         try(Connection con = super.getConnection()){
@@ -91,6 +96,5 @@ public class StudentDaoImpl extends mysqlBaseDao implements StudentDao {
             System.out.println(e);
             return null;
         }
-
     }
 }

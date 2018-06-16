@@ -2,6 +2,8 @@ package nl.hu.ipass.persistence;
 
 import nl.hu.ipass.domain.Student;
 
+/*Interface voor de StudentDao. Deze kan nog door verschillende databases worden geimplementeerd.*/
+
 public interface StudentDao {
     public Student save(Student student);
 

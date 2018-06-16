@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HuisDaoImpl extends mysqlBaseDao implements HuisDao {
+
+    /*Methode om een nieuw huis in de database toe te voegen: */
     @Override
     public Huis save(Huis huis) {
         try(Connection con = super.getConnection()){
@@ -29,6 +31,7 @@ public class HuisDaoImpl extends mysqlBaseDao implements HuisDao {
         }
     }
 
+    /*Methode om een huis uit de database te verwijderen: */
     @Override
     public boolean delete(Huis huis) {
         try(Connection con = super.getConnection() ){
@@ -42,6 +45,7 @@ public class HuisDaoImpl extends mysqlBaseDao implements HuisDao {
         }
     }
 
+    /*Methode om een huis alle gegevens van het huis op te vragen: */
     @Override
     public Huis findById(int id) {
         try(Connection con = super.getConnection()) {
@@ -57,6 +61,7 @@ public class HuisDaoImpl extends mysqlBaseDao implements HuisDao {
         }
     }
 
+    /*Methode om alle huizen die in de database staan op te vragen: */
     @Override
     public List<Huis> findAll(){
         List<Huis> results = new ArrayList<Huis>();

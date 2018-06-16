@@ -5,12 +5,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 import nl.hu.ipass.domain.Student;
-import nl.hu.ipass.persistence.StudentDao;
-import nl.hu.ipass.persistence.StudentDaoImpl;
+
 import nl.hu.ipass.services.ServiceProvider;
 import nl.hu.ipass.services.StudentService;
 import org.apache.commons.codec.digest.DigestUtils;
-
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -29,7 +27,7 @@ public class AuthenticationResource {
     public Response authenticateUser(@FormParam("email") String email,
                                      @FormParam("wachtwoord") String wachtwoord) {
         try {
-// Authenticate the user against the database
+            /*Authenticate de gebruiker tegen de database*/
             StudentService studentService = ServiceProvider.getStudentService();
             Student student = studentService.findByEmailAndWachtwoord(email,DigestUtils.sha256Hex(wachtwoord));
 
@@ -42,6 +40,7 @@ public class AuthenticationResource {
         } catch (JwtException | IllegalArgumentException e)
         { return Response.status(Response.Status.UNAUTHORIZED).build(); }
     }
+    /*Hier wordt het token gemaakt en terug gegeven: */
     private String createToken(String email, int id) throws JwtException {
         Calendar expiration = Calendar.getInstance();
         expiration.add(Calendar.MINUTE, 30);

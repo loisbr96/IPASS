@@ -13,12 +13,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+/*Hier wordt de class bepaald: */
 @Path("/slaapplek")
 @RolesAllowed("student")
 @Produces("application/json")
 public class SlaapplekResource {
     SlaapplekService service = ServiceProvider.getSlaapplekService();
 
+    /*De response om een nieuwe slaapplek aan te maken d.m.v. van de save functie*/
     @POST
     public Response newSlaapplek(@FormParam("datum") String datum,
                                  @FormParam("huis") int huisId,
@@ -36,6 +38,8 @@ public class SlaapplekResource {
         }
     }
 
+    /*De Response om een slaapplek te wijzigen d.m.v. de opgegeven datum.
+    * Kan alleen gewijzigt worden van de ingelogde gebruiker*/
     @PUT
     @Path("/{datum}")
     public Response updateSlaapplek(@PathParam("datum") String datum,
@@ -56,6 +60,8 @@ public class SlaapplekResource {
         }
     }
 
+    /*De response om een slaapplek te krijgen op basis van het id en datum.
+    * Alle studenten die in dat huis slapen op die datum worden als lijst terug gegeven*/
     @GET
     @Path("/huis/{id}/{datum}")
     public List<Slaapplek> getHuisAndDatum(@PathParam("id") int huisId,
@@ -65,6 +71,7 @@ public class SlaapplekResource {
         return service.findByHuisAndDatum(huis,datum);
     }
 
+    /*Response om van die datum voor de ingelogde student de slaapplek terug te krijgen.*/
     @GET
     @Path("/datum/{datum}")
     public Slaapplek getHuisForDatum(@PathParam("datum") String datum,

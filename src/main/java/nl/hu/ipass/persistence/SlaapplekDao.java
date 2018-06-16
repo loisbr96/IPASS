@@ -6,15 +6,11 @@ import nl.hu.ipass.domain.Student;
 
 import java.util.List;
 
+/*Interface voor de SlaapplekDao. Deze kan nog door verschillende databases worden geimplementeerd.*/
+
 public interface SlaapplekDao {
 
     public Slaapplek save(Slaapplek slaapplek);
-
-//    public Slaapplek findByDatum(String datum);
-
-//    public List<Slaapplek> findByHuis(Huis huis);
-
-//    public List<Slaapplek> findByStudent(Student student);
 
     public Slaapplek findByStudentAndDatum(Student student, String datum);
 
@@ -23,7 +19,5 @@ public interface SlaapplekDao {
     public boolean update(Slaapplek slaapplek);
 
     public boolean delete(Slaapplek slaapplek);
-
-//    public Slaapplek findById(int id);
 
 }

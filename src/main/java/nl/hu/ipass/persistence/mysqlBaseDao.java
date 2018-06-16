@@ -4,6 +4,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
 
+/*In deze class wordt de connectie gemaakt met Mysql: */
 public class mysqlBaseDao {
     protected final Connection getConnection(){
         Connection result = null;

@@ -11,12 +11,14 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+/*Hier wordt de class bepaald en de studentservices aangeroepen: */
 @Path("/student")
 @RolesAllowed("student")
 @Produces("application/json")
 public class StudentResource {
     StudentService service = ServiceProvider.getStudentService();
 
+    /*De response voor een nieuwe student wat de meegegeven waarden opslaat d.m.v. de save functie*/
     @POST
     @PermitAll
     public Response newStudent(@FormParam("voornaam") String voornaam,
@@ -28,6 +30,9 @@ public class StudentResource {
         return Response.ok(newStudent).build();
     }
 
+    /*De Response voor het opvragen van een student.
+    * Het vraagt d.m.v. de MySecurity het id van de ingelogte student op.
+     * Het geeft met dit id de info van de student.*/
     @GET
     public Student getStudent(@Context ContainerRequestContext context) {
         MySecurityContext msc = (MySecurityContext) context.getSecurityContext();
@@ -35,6 +40,7 @@ public class StudentResource {
         return service.findById(msc.getId());
     }
 
+    /*Response op de student te updaten d.m.v. meegegeven waarden. */
     @PUT
     public Response updateStudent(@Context ContainerRequestContext context,
                                   @FormParam("voornaam") String voornaam,
@@ -52,7 +58,9 @@ public class StudentResource {
         return Response.status(200).build();
     }
 
-
+    /*Response om de student te verwijderen. Mag alleen zichzelf verwijderen.
+    * Door middel van de ingelogde student wordt het id opgevraagd.
+    * Deze wordt meegezonden in het verzoek.*/
     @DELETE
     public Response deleteStudent(@Context ContainerRequestContext context){
         MySecurityContext msc = (MySecurityContext) context.getSecurityContext();

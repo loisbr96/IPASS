@@ -4,9 +4,9 @@ import nl.hu.ipass.domain.Student;
 import nl.hu.ipass.persistence.StudentDao;
 import nl.hu.ipass.persistence.StudentDaoImpl;
 
+/*Deze service geeft het resultaat van de dao*/
 public class StudentService {
     private StudentDao studentDao;
-
     public StudentService(){
         studentDao = new StudentDaoImpl();
     }
@@ -18,7 +18,6 @@ public class StudentService {
     public boolean update(Student student){
         return studentDao.update(student);
     }
-
 
     public boolean delete(Student student){
         return studentDao.delete(student);

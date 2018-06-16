@@ -4,6 +4,8 @@ import nl.hu.ipass.domain.Huis;
 
 import java.util.List;
 
+/*Interface voor de HuisDao. Deze kan nog door verschillende databases worden geimplementeerd.*/
+
 public interface HuisDao {
     public Huis save(Huis huis);
 

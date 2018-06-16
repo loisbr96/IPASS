@@ -8,6 +8,7 @@ import nl.hu.ipass.persistence.SlaapplekDaoImpl;
 
 import java.util.List;
 
+/*Deze service geeft het resultaat van de dao*/
 public class SlaapplekService {
     private SlaapplekDao slaapplekDao;
 
@@ -26,22 +27,6 @@ public class SlaapplekService {
     public boolean delete(Slaapplek slaapplek){
         return slaapplekDao.delete(slaapplek);
     }
-
-//    public Slaapplek findByDatum(String datum){
-//        return slaapplekDao.findByDatum(datum);
-//    }
-
-//    public List<Slaapplek> findByHuis(Huis huis) {
-//        return slaapplekDao.findByHuis(huis);
-//    }
-
-//    public Slaapplek findById(int id) {
-//        return slaapplekDao.findById(id);
-//    }
-//
-//    public List<Slaapplek> findByStudent(Student student) {
-//        return slaapplekDao.findByStudent(student);
-//    }
 
     public List<Slaapplek> findByHuisAndDatum(Huis huis, String datum) {
         return slaapplekDao.findByHuisAndDatum(huis,datum);
