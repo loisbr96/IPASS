@@ -1,26 +1,60 @@
-body{
-    background: #fffffd ; /*bright white*/
-    margin: 25px;
+@media only screen and(min-width: 750px) {
+
 
 }
+body{
+    background: #fffffd ; /*bright white*/
+    font-family: Arial, Arial, SansSerif;
+    /*margin: 25px;*/
+}
 
-#login{
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #789440; /*green*/
+}
+
+    li{
+        float: left;
+    }
+
+    li a{
+        display: block;
+        color: #000000;
+        text-align: center;
+        padding: 13px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover{
+        background-color: #617733;
+    }
+#button{
+    background: #a9a9a9; /*bright white*/
+    border: 1px solid #000000; /*black*/
+    border-radius: 4px;
+    color: #000000; /*black*/
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+#frame{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+#loginDiv{
     background: #789440; /*Green*/
     width: 300px;
     height: 300px;
     margin: auto;
     border: 2px solid #a9a9a9; /*Darkgrey*/
     text-align: center;
-
 }
 
-#loginButton{
-    background: #a9a9a9;
-    margin: 10px;
-    border: 1px solid #000000;
-    color: #000000; /*black*/
-    padding: 5px 10px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-}
+
