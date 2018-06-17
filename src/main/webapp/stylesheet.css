@@ -1,4 +1,12 @@
 @media only screen and(min-width: 750px) {
+    #frame{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: 2fr 1fr 10fr 2fr;
+    }
+    #navigatie  { grid-column: 1/3;  grid-row: 2;}
+    #noImage    { grid-column: 3;    grid-row: 1/2;}
+    #logoImage  { grid-column: 1;    grid-row: 1/2;}
 
 
 }
@@ -9,11 +17,11 @@ body{
 }
 
 ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
     background-color: #789440; /*green*/
+    list-style-type: none;
+    margin-left: 0;
+    overflow: hidden;
+    padding-left: 150px;
 }
 
     li{
@@ -48,6 +56,17 @@ ul{
     margin-right: 150px;
 }
 
+#logoImage{
+    float: left;
+    height: 50px;
+    width: 50px;
+}
+
+#noImage{
+    float: right;
+    height: 50px;
+    width: 50px;
+}
 #loginDiv{
     background: #789440; /*Green*/
     width: 300px;

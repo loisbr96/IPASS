@@ -10,6 +10,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 /*Hier wordt de class bepaald en de studentservices aangeroepen: */
 @Path("/student")
@@ -55,7 +57,9 @@ public class StudentResource {
         student.setEmail(email);
 
         service.update(student);
-        return Response.status(200).build();
+        Map<String, String> updateStudent = new HashMap<String, String>();
+        updateStudent.put("ok","De student in geupdate" );
+        return Response.status(200).entity(updateStudent).build();
     }
 
     /*Response om de student te verwijderen. Mag alleen zichzelf verwijderen.
@@ -66,10 +70,14 @@ public class StudentResource {
         MySecurityContext msc = (MySecurityContext) context.getSecurityContext();
         Student student = service.findById(msc.getId());
         if(student == null){
-            return Response.status(404).build();
+            Map<String, String> geenStudent = new HashMap<String, String>();
+            geenStudent.put("error","Deze student bestaat niet" );
+            return Response.status(404).entity(geenStudent).build();
         } else {
+            Map<String, String> deleteStudent = new HashMap<String, String>();
+            deleteStudent.put("ok","De student is verwijderd" );
             service.delete(student);
-            return Response.status(200).build();
+            return Response.status(200).entity(deleteStudent).build();
         }
     }
 

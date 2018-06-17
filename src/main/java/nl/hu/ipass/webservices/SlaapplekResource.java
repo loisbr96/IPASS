@@ -11,7 +11,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*Hier wordt de class bepaald: */
 @Path("/slaapplek")
@@ -51,12 +53,16 @@ public class SlaapplekResource {
 
         Huis huis = ServiceProvider.getHuisService().findById(huisId);
         if(huis == null){
-            return Response.status(404).build();
+            Map<String, String> geenHuis = new HashMap<String, String>();
+            geenHuis.put("error","Dit huis bestaat niet" );
+            return Response.status(404).entity(geenHuis).build();
         } else{
             Slaapplek slaapplek = service.findByStudentAndDatum(student, datum);
             slaapplek.setHuis(huis);
             service.update(slaapplek);
-            return Response.ok().build();
+            Map<String, String> updateSlaapplek = new HashMap<String, String>();
+            updateSlaapplek.put("ok","Slaapplek geupdate" );
+            return Response.status(200).entity(updateSlaapplek).build();
         }
     }
 

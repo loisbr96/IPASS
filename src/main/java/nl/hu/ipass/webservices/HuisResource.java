@@ -7,7 +7,9 @@ import nl.hu.ipass.services.ServiceProvider;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*Hier wordt de methode gedefinieerd*/
 @Path("/huis")
@@ -46,9 +48,13 @@ public class HuisResource {
     public Response deleteHuis(@PathParam("id") int id){
         Huis huis = service.findById(id);
         if(huis == null){
+            Map<String, String> geenHuis = new HashMap<String, String>();
+            geenHuis.put("error","Dit huis bestaat niet" );
             return Response.status(404).build();
         } else {
             service.delete(huis);
+            Map<String, String> deleteHuis = new HashMap<String, String>();
+            deleteHuis.put("ok","Dit huis is verwijderd" );
             return Response.status(200).build();
         }
     }
