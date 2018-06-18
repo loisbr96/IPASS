@@ -29,7 +29,13 @@ public class StudentResource {
                                 @FormParam("email") String email,
                                 @FormParam("wachtwoord") String wachtwoord){
         Student newStudent = service.save(new Student(voornaam, tussenvoegsel, achternaam, email, wachtwoord));
-        return Response.ok(newStudent).build();
+        if(newStudent == null) {
+            Map<String, String> geenStudent = new HashMap<String, String>();
+            geenStudent.put("error", "Deze student bestaat niet");
+            return Response.status(404).entity(geenStudent).build();
+        }else{
+            return Response.ok(newStudent).build();
+        }
     }
 
     /*De Response voor het opvragen van een student.

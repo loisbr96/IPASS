@@ -26,7 +26,13 @@ public class HuisResource {
                             @FormParam("postcode") String postcode,
                             @FormParam("plaatsnaam") String plaatsnaam){
         Huis newHuis = service.save(new Huis(naam,straatnaam ,huisnummer ,postcode ,plaatsnaam));
-        return Response.ok(newHuis).build();
+        if(newHuis == null){
+            Map<String, String> geenHuis = new HashMap<String, String>();
+            geenHuis.put("error","Dit huis bestaat niet" );
+            return Response.status(404).entity(geenHuis).build();
+        }else{
+            return Response.ok(newHuis).build();
+        }
     }
 
     /*Response om gegevens van een huis te krijgen op basis van het huisId*/
@@ -50,12 +56,12 @@ public class HuisResource {
         if(huis == null){
             Map<String, String> geenHuis = new HashMap<String, String>();
             geenHuis.put("error","Dit huis bestaat niet" );
-            return Response.status(404).build();
+            return Response.status(404).entity(geenHuis).build();
         } else {
             service.delete(huis);
             Map<String, String> deleteHuis = new HashMap<String, String>();
             deleteHuis.put("ok","Dit huis is verwijderd" );
-            return Response.status(200).build();
+            return Response.status(200).entity(deleteHuis).build();
         }
     }
 

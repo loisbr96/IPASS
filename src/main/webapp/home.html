@@ -7,21 +7,71 @@
 </head>
 <body>
 <div id="frame">
-    <img src="Logo.jpg" id="logoImage">
-    <div id="navigatie">
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="Slaapplek.html">Slaapplek</a></li>
-            <li><a href="huisOverzicht.html">Huis overzicht</a></li>
-            <li><a href="studentToevoegen.html">Student toevoegen</a></li>
-            <li><a href="huisToevoegen.html">Huis toevoegen</a></li>
-        </ul>
+    <div class="navigatie">
+        <a href="home.html">
+            <img src="Logo.jpg" id="logoImage" >
+        </a>
+        Welkom
+        <a href="student.html">
+            <img src="noImage.png" id="noImage">
+        </a>
+        <button onclick="studentToevoegen()" value="Nieuwe student" id="nieuweStudent"></button>
     </div>
-    <img src="noImage.png" id="noImage">
 
-    <div id="homeDiv">
-        <h2>Home</h2>
+    <div class="slaapplek">
+        Slaapplek
     </div>
+
+    <div class="huis">
+        <form>
+            <select id="kiesHuis" name="id"></select>
+            <input type="date" name="datum">
+            <input type="button" value="Vind studenten">
+        </form>
+
+
+        <button class="button" id="addHuis"> + </button>
+        <button class="button" id="deleteHuis"> - </button>
+    </div>
+</div>
+
+<div id="huisToevoegenDiv">
+    <h2>Huis toevoegen</h2>
+    <form id="huisToevoegen">
+        <div class="row">
+            <div class="col m3">
+                <label>Naam:</label><br>
+                <label>Straatnaam: </label><br>
+                <label>Huisnummer:</label><br>
+                <label>Postcode: </label><br>
+                <label>Plaatsnaam:</label><br>
+            </div>
+            <div class="col m9">
+                <input type="text" name="naam" id="naamInput"> <br>
+                <input type="text" name="straatnaam" id="straatnaamInput"><br>
+                <input type="number" name="huisnummer" id="huisnummerInput"><br>
+                <input type="text" name="postcode" id="postcodeInput"><br>
+                <input type="text" name="plaatsnaam" id="plaatsnaamInput"><br>
+                <input type="button" class="button" onclick="huisToevoegen()" value="Huis toevoegen" id="huisButton">
+            </div>
+        </div>
+    </form>
+</div>
+<div id="studentToevoegenDiv">
+    <form id="studentToevoegen">
+        <h2>Student toevoegen</h2>
+        <label>Voornaam:</label>
+        <input type="text" name="voornaam" id="voornaamInput"><br>
+        <label>Tussenvoegsel:</label>
+        <input type="text" name="tusenvoegsel" id="tussenvoegselInput"><br>
+        <label>Achternaam:</label>
+        <input type="text" name="achternaam" id="achternaamInput"><br>
+        <label>Email:</label>
+        <input type="text" name="email" id="emailInput"><br>
+        <label>Wachtwoord:</label>
+        <input type="password" name="wachtwoord" id="wachtwoordInput"><br>
+        <input type="button" onclick="studentToevoegen()" id="studentToevoegenButton" value="Registreren">
+    </form>
 </div>
 
 <script src="main.js"></script>

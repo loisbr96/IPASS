@@ -1,45 +1,29 @@
-@media only screen and(min-width: 750px) {
-    #frame{
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-        grid-template-rows: 2fr 1fr 10fr 2fr;
-    }
-    #navigatie  { grid-column: 1/3;  grid-row: 2;}
-    #noImage    { grid-column: 3;    grid-row: 1/2;}
-    #logoImage  { grid-column: 1;    grid-row: 1/2;}
-
-
+.col {
+    float: left;
 }
+
+.col.m3 {
+    width: 25%;
+}
+
+.col.m9 {
+    width: 75%;
+}
+
+#frame{
+    display: grid;
+}
+.navigatie  {grid-column: 1/3;  grid-row: 1; height: 10vh;}
+.huis       {grid-column: 2;     grid-row: 2;}
+.slaapplek  {grid-column: 1;     grid-row: 2;}
+
 body{
     background: #fffffd ; /*bright white*/
     font-family: Arial, Arial, SansSerif;
-    /*margin: 25px;*/
+    padding: 0;
 }
 
-ul{
-    background-color: #789440; /*green*/
-    list-style-type: none;
-    margin-left: 0;
-    overflow: hidden;
-    padding-left: 150px;
-}
-
-    li{
-        float: left;
-    }
-
-    li a{
-        display: block;
-        color: #000000;
-        text-align: center;
-        padding: 13px 16px;
-        text-decoration: none;
-    }
-
-    li a:hover{
-        background-color: #617733;
-    }
-#button{
+.button{
     background: #a9a9a9; /*bright white*/
     border: 1px solid #000000; /*black*/
     border-radius: 4px;
@@ -51,21 +35,16 @@ ul{
     text-align: center;
 }
 
-#frame{
-    margin-left: 150px;
-    margin-right: 150px;
-}
-
 #logoImage{
     float: left;
-    height: 50px;
-    width: 50px;
+    height: 5vh;
+    width: 5vw;
 }
 
 #noImage{
     float: right;
-    height: 50px;
-    width: 50px;
+    height: 5vh;
+    width: 5vw;
 }
 #loginDiv{
     background: #789440; /*Green*/
@@ -76,4 +55,38 @@ ul{
     text-align: center;
 }
 
+#huisToevoegenDiv{
+    display: none;
+    position: absolute;
+    top: 40%;
+    width: 25vw;
+    height: 25vh;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin:  auto;
+    border: 1px solid black;
+}
+
+#studentToevoegenDiv{
+    display: none;
+    position: absolute;
+    top: 40%;
+    width: 25vw;
+    height: 25vh;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin:  auto;
+    border: 1px solid black;
+}
+#huis{
+    float: right;
+}
+
+#slaapplek{
+    float: left;
+}
 
