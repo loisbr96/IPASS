@@ -58,36 +58,50 @@
         </div>
     </form>
 </div>
+
 <div id="popup-StudentToevoegen">
+    <h2>Student toevoegen</h2>
     <form id="studentToevoegen">
-        <h2>Student toevoegen</h2>
-        <label>Voornaam:</label>
-        <input type="text" name="voornaam" id="voornaamInput"><br>
-        <label>Tussenvoegsel:</label>
-        <input type="text" name="tusenvoegsel" id="tussenvoegselInput"><br>
-        <label>Achternaam:</label>
-        <input type="text" name="achternaam" id="achternaamInput"><br>
-        <label>Email:</label>
-        <input type="text" name="email" id="emailInput"><br>
-        <label>Wachtwoord:</label>
-        <input type="password" name="wachtwoord" id="wachtwoordInput"><br>
-        <input type="button" onclick="studentToevoegen()" id="studentToevoegenButton" value="Registreren">
+        <div class="row">
+            <div class="col m3">
+                <label>Voornaam:</label><br>
+                <label>Tussenvoegsel:</label><br>
+                <label>Achternaam:</label><br>
+                <label>Email:</label><br>
+                <label>Wachtwoord:</label><br>
+            </div>
+            <div class="col m9">
+                <input type="text" name="voornaam" id="voornaamInput"><br>
+                <input type="text" name="tusenvoegsel" id="tussenvoegselInput"><br>
+                <input type="text" name="achternaam" id="achternaamInput"><br>
+                <input type="text" name="email" id="emailInput"><br>
+                <input type="password" name="wachtwoord" id="wachtwoordInput"><br>
+                <input type="button" onclick="studentToevoegen()" id="studentToevoegenButton" value="Registreren">
+            </div>
+        </div>
     </form>
 </div>
 <div id="popup-StudentInfo">
+    <h2>Student info</h2>
     <form id="studentInfo">
-        <label>Voornaam:</label>
-        <input type="text" name="voornaam" id="voornaam"><br>
-        <label>Tussenvoegsel:</label>
-        <input type="text" name="tusenvoegsel" id="tussenvoegsel"><br>
-        <label>Achternaam:</label>
-        <input type="text" name="achternaam" id="achternaam"><br>
-        <label>Email:</label>
-        <input type="text" name="email" id="email"><br>
-        <label>Wachtwoord:</label>
-        <input type="password" name="wachtwoord" id="wachtwoord"><br>
-        <input type="button" onclick="studentWijzig()" id="studentInfoButton" value="Wijzig">
-        <input type="button" onclick="studentDelete()" id="studentDeleteButton" value="Delete">
+        <div class="row">
+            <div class="col m3">
+                <label>Voornaam:</label><br>
+                <label>Tussenvoegsel:</label><br>
+                <label>Achternaam:</label><br>
+                <label>Email:</label><br>
+                <label>Wachtwoord:</label><br>
+            </div>
+            <div class="col m9">
+                <input type="text" name="voornaam" id="voornaam"><br>
+                <input type="text" name="tusenvoegsel" id="tussenvoegsel"><br>
+                <input type="text" name="achternaam" id="achternaam"><br>
+                <input type="text" name="email" id="email"><br>
+                <input type="password" name="wachtwoord" id="wachtwoord"><br>
+                <input type="button" onclick="studentWijzig()" id="studentInfoButton" value="Wijzig">
+                <input type="button" onclick="studentDelete()" id="studentDeleteButton" value="Delete">
+            </div>
+        </div>
     </form>
 </div>
 
