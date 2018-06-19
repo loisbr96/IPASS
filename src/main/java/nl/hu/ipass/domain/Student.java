@@ -1,5 +1,6 @@
 package nl.hu.ipass.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class Student {
         return achternaam;
     }
 
+    @JsonIgnore
     public String getVolledigeNaam(){
         if(tussenvoegsel.equals("")){
             return voornaam + " " + achternaam;
@@ -79,9 +81,7 @@ public class Student {
     }
 
     public void setWachtwoord(String oudWachtwoord, String nieuwWachtwoord){
-        if(this.wachtwoord.equals(DigestUtils.sha256Hex(oudWachtwoord))){
-            this.wachtwoord = DigestUtils.sha256Hex(nieuwWachtwoord);
-        }
+        this.wachtwoord = DigestUtils.sha256Hex(nieuwWachtwoord);
     }
 
     /*Methode om te controleren of het wachtwoord correct is:*/

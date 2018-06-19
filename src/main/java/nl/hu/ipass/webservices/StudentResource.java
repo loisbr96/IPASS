@@ -54,13 +54,15 @@ public class StudentResource {
                                   @FormParam("voornaam") String voornaam,
                                   @FormParam("tussenvoegsel") String tussenvoegsel,
                                   @FormParam("achternaam") String achternaam,
-                                  @FormParam("email") String email){
+                                  @FormParam("email") String email,
+                                  @FormParam("wachtwoord")String wachtwoord){
         MySecurityContext msc = (MySecurityContext) context.getSecurityContext();
         Student student = service.findById(msc.getId());
         student.setVoornaam(voornaam);
         student.setTussenvoegsel(tussenvoegsel);
         student.setAchternaam(achternaam);
         student.setEmail(email);
+        student.setWachtwoord(wachtwoord, wachtwoord);
 
         service.update(student);
         Map<String, String> updateStudent = new HashMap<String, String>();

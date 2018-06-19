@@ -12,10 +12,11 @@
             <img src="Logo.jpg" id="logoImage" >
         </a>
         Welkom
-        <a href="student.html">
-            <img src="noImage.png" id="noImage">
-        </a>
-        <button onclick="studentToevoegen()" value="Nieuwe student" id="nieuweStudent"></button>
+
+        <button id="studentPop"><img src="noImage.png" id="noImage"></button>
+
+        <button onclick="studentToevoegen()" id="nieuweStudent">Nieuwe student</button>
+        <button onclick="uitloggen()" id="uitloggen">Uitloggen</button>
     </div>
 
     <div class="slaapplek">
@@ -35,7 +36,7 @@
     </div>
 </div>
 
-<div id="huisToevoegenDiv">
+<div id="popup-HuisToevoegen">
     <h2>Huis toevoegen</h2>
     <form id="huisToevoegen">
         <div class="row">
@@ -57,7 +58,7 @@
         </div>
     </form>
 </div>
-<div id="studentToevoegenDiv">
+<div id="popup-StudentToevoegen">
     <form id="studentToevoegen">
         <h2>Student toevoegen</h2>
         <label>Voornaam:</label>
@@ -71,6 +72,22 @@
         <label>Wachtwoord:</label>
         <input type="password" name="wachtwoord" id="wachtwoordInput"><br>
         <input type="button" onclick="studentToevoegen()" id="studentToevoegenButton" value="Registreren">
+    </form>
+</div>
+<div id="popup-StudentInfo">
+    <form id="studentInfo">
+        <label>Voornaam:</label>
+        <input type="text" name="voornaam" id="voornaam"><br>
+        <label>Tussenvoegsel:</label>
+        <input type="text" name="tusenvoegsel" id="tussenvoegsel"><br>
+        <label>Achternaam:</label>
+        <input type="text" name="achternaam" id="achternaam"><br>
+        <label>Email:</label>
+        <input type="text" name="email" id="email"><br>
+        <label>Wachtwoord:</label>
+        <input type="password" name="wachtwoord" id="wachtwoord"><br>
+        <input type="button" onclick="studentWijzig()" id="studentInfoButton" value="Wijzig">
+        <input type="button" onclick="studentDelete()" id="studentDeleteButton" value="Delete">
     </form>
 </div>
 
