@@ -1,6 +1,13 @@
 if(!sessionStorage.getItem('JWT') && window.location.href.split("/").slice(-1)[0] == 'home.html'){
     window.location.href = 'index.html'
 }
+Date.prototype.yyyymm = function() {
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+
+    return [this.getFullYear(),
+        (mm>9 ? '' : '0') + mm,
+    ].join('-');
+};
 
 function openPopup(open) {
     let popups = document.querySelectorAll("div[id^=popup-]")
@@ -86,6 +93,21 @@ function huisToevoegen() {
         })
 }
 
+function huisDelete() {
+    let id = document.querySelector("#KiesHuisDelete").value
+
+    fetch("/api/huis/" + id, {method: 'DELETE', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
+        .then(response =>{
+            if(response.status == 200){
+                laadHuizenDelete();
+                alert("Huis verwijderd");
+                laadHuizen();
+            } else{
+                alert("Huis kan niet worden verwijderd");
+            }
+        })
+}
+
 function login(){
     let formData = new FormData(document.querySelector("#login"));
     let encData = new URLSearchParams(formData.entries());
@@ -107,14 +129,79 @@ function laadHuizen() {
     fetch("/api/huis", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
         .then(response => response.json())
         .then(function (myJson) {
-            let select = document.querySelector("#kiesHuis");
+            let select = document.querySelectorAll(".kiesHuis");
+            for(selectbox of select){
+                selectbox.innerHTML = '';
+
+                let defaultOpt = document.createElement('option')
+                defaultOpt.value = -1
+                defaultOpt.text = ' -- selecteer een huis -- '
+                selectbox.add(defaultOpt)
+                // selectbox.innerHTML += '<option disabled selected value="-1"> -- selecteer een huis -- </option>'
+                for(huis of myJson){
+                    let option = document.createElement('option')
+                    option.value = huis.id
+                    option.text = huis.naam
+                    selectbox.add(option)
+                    //selectbox.innerHTML += '<option value="' + huis.id + '">' + huis.naam + '</option>'
+                }
+            }
+            select = document.querySelectorAll(".kiesHuis");
+
+            for(const selectbox of select){
+                if(selectbox.id.startsWith("slaapplek-")){
+                    let datum = document.querySelector('input#' + selectbox.id).value;
+                    datum = datum.split('-')[2] + '-' + datum.split('-')[1] + '-' + datum.split('-')[0];
+                    fetch("api/slaapplek/datum/" + datum , {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
+                        .then(async response => {
+                            if (response.status == 200) {
+                                let myJson = await response.json()
+                                selectbox.value = myJson.huis.id
+                            }
+                        })
+                }
+            }
+        })
+}
+
+function laadHuizenDelete() {
+    fetch("/api/huis", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
+        .then(response => response.json())
+        .then(function (myJson) {
+            let select = document.querySelector("#KiesHuisDelete");
             select.innerHTML = '';
             for(huis of myJson){
-
                 select.innerHTML += '<option value="' + huis.id + '">' + huis.naam + '</option>'
             }
         })
 }
+
+function slaapplekToevoegen(event) {
+    let datum = document.querySelector('input#' + event.target.id).value;
+    let vandaag = new Date();
+    vandaag.setHours(0,0,0,0);
+    if (new Date(datum) < vandaag){
+        alert("U mag geen datum in het verleden aanpassen");
+        return;
+    } else {
+        datum = datum.split('-')[2] + '-' + datum.split('-')[1] + '-' + datum.split('-')[0];
+    }
+
+    let formData = new FormData();
+    formData.append('huis', event.target.value);
+    formData.append('datum', datum);
+    let encData = new URLSearchParams(formData.entries());
+    fetch("api/slaapplek", {method: 'POST', body: encData, headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
+        .then(response =>{
+            if(response.status == 200){
+                alert("Slaapplek is toegevoegd");
+            }else {
+                alert("Deze slaapplek kon niet worden opgeslagen");
+            }
+        } )
+}
+
+
 
 function uitloggen(){
     window.sessionStorage.removeItem('JWT');
@@ -134,6 +221,27 @@ function uitloggen(){
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    let datumWeek = new Date()
+    let monthYear = datumWeek.yyyymm()
+    for (let i = 0; i < 8; i++) {
+        let day = datumWeek.getDate() + i
+        day = (day>9 ? '' : '0') + day
+
+        let table = document.querySelector('#slaapplekkenTable tbody')
+        table.innerHTML += '<tr>' +
+            '                    <form id="slaapplek-' + i + '">' +
+            '                        <th><input type="date" id="slaapplek-' + i + '" name="datum" value="' + monthYear + '-' + day + '" disabled></th>' +
+            '                        <th><select class="kiesHuis" id="slaapplek-' + i + '"></select></th>' +
+            '                    </form>' +
+            '                </tr>'
+    }
+
+    let selectSlaapplekken = document.querySelectorAll('select[id^=slaapplek-]')
+
+    for (selectSlaapplek of selectSlaapplekken) {
+        selectSlaapplek.addEventListener("change", slaapplekToevoegen)
+    }
+
     laadHuizen();
     document.querySelector("#addHuis").addEventListener("click", function () {
         openPopup("HuisToevoegen");
@@ -145,4 +253,9 @@ document.addEventListener("DOMContentLoaded", () => {
         studentInfo();
         openPopup("StudentInfo");
     });
+    document.querySelector("#deleteHuis").addEventListener("click", function () {
+        laadHuizenDelete();
+        openPopup("huisDelete");
+    })
+
 });

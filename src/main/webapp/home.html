@@ -20,12 +20,17 @@
     </div>
 
     <div class="slaapplek">
-        Slaapplek
+        <h2>Slaapplek</h2>
+
+        <table id="slaapplekkenTable">
+            <tbody>
+            </tbody>
+        </table>
     </div>
 
     <div class="huis">
         <form>
-            <select id="kiesHuis" name="id"></select>
+            <select class="kiesHuis" name="id"></select>
             <input type="date" name="datum">
             <input type="button" value="Vind studenten">
         </form>
@@ -34,6 +39,20 @@
         <button class="button" id="addHuis"> + </button>
         <button class="button" id="deleteHuis"> - </button>
     </div>
+</div>
+
+<div id="popup-huisDelete">
+    <h2>Huis verwijderen</h2>
+    <form id="huisVerwijderen">
+        <div class="row">
+            <div class="col m3">
+                <select id="KiesHuisDelete" name="id"></select>
+            </div>
+            <div class="col m9">
+                <input type="button" class="button" onclick="huisDelete()" value="Huis verwijderen" id="huisDeleteButton">
+            </div>
+        </div>
+    </form>
 </div>
 
 <div id="popup-HuisToevoegen">
