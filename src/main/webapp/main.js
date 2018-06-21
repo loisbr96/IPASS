@@ -16,6 +16,38 @@ function openPopup(open) {
         popup.style.display = 'none';
     }
     document.querySelector("#popup-" + open).style.display = 'block';
+
+}
+
+function closePopup() {
+    let popups = document.querySelectorAll("div[id^=popup-]");
+
+    for (popup of popups) {
+        popup.style.display = 'block'
+    }
+    document.querySelector("#popup-").style.display = 'none'
+}
+
+function login(){
+    let formData = new FormData(document.querySelector("#login"));
+    let encData = new URLSearchParams(formData.entries());
+    fetch("/api/authentication", { method: 'POST', body: encData })
+        .then(async response => {
+            if(response.status == 200){
+                json = await response.json();
+
+                window.sessionStorage.setItem('JWT', json.JWT);
+                console.log("Gebruiker ingelogt");
+                window.location.href = 'home.html';
+            } else{
+                alert("Email en wachtwoord komen niet overeen");
+            }
+        })
+}
+
+function uitloggen(){
+    window.sessionStorage.removeItem('JWT');
+    window.location.href = 'index.html'
 }
 
 function studentToevoegen() {
@@ -38,10 +70,10 @@ function studentInfo() {
         .then(response => response.json())
         .then(function (myJson) {
             document.querySelector("#voornaam").value = myJson.voornaam;
-            if(myJson.tusenvoegsel == undefined){
+            if(myJson.tussenvoegsel == undefined){
                 document.querySelector("#tussenvoegsel").value = "";
             }else{
-                document.querySelector("#tussenvoegsel").value = myJson.tusenvoegsel;
+                document.querySelector("#tussenvoegsel").value = myJson.tussenvoegsel;
             }
             document.querySelector("#achternaam").value = myJson.achternaam;
             document.querySelector("#email").value = myJson.email;
@@ -108,22 +140,7 @@ function huisDelete() {
         })
 }
 
-function login(){
-    let formData = new FormData(document.querySelector("#login"));
-    let encData = new URLSearchParams(formData.entries());
-    fetch("/api/authentication", { method: 'POST', body: encData })
-        .then(async response => {
-            if(response.status == 200){
-                json = await response.json();
 
-                window.sessionStorage.setItem('JWT', json.JWT);
-                console.log("Gebruiker ingelogt");
-                window.location.href = 'home.html';
-            } else{
-                alert("Email en wachtwoord komen niet overeen");
-            }
-        })
-}
 
 function laadHuizen() {
     fetch("/api/huis", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
@@ -133,17 +150,17 @@ function laadHuizen() {
             for(selectbox of select){
                 selectbox.innerHTML = '';
 
-                let defaultOpt = document.createElement('option')
-                defaultOpt.value = -1
-                defaultOpt.text = ' -- selecteer een huis -- '
-                selectbox.add(defaultOpt)
+                let defaultOpt = document.createElement('option');
+                defaultOpt.value = -1;
+                defaultOpt.text = ' -- selecteer een huis -- ';
+                selectbox.add(defaultOpt);
                 // selectbox.innerHTML += '<option disabled selected value="-1"> -- selecteer een huis -- </option>'
                 for(huis of myJson){
-                    let option = document.createElement('option')
-                    option.value = huis.id
-                    option.text = huis.naam
+                    let option = document.createElement('option');
+                    option.value = huis.id;
+                    option.text = huis.naam;
                     selectbox.add(option)
-                    //selectbox.innerHTML += '<option value="' + huis.id + '">' + huis.naam + '</option>'
+                    selectbox.innerHTML += '<option value="' + huis.id + '">' + huis.naam + '</option>'
                 }
             }
             select = document.querySelectorAll(".kiesHuis");
@@ -155,12 +172,13 @@ function laadHuizen() {
                     fetch("api/slaapplek/datum/" + datum , {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
                         .then(async response => {
                             if (response.status == 200) {
-                                let myJson = await response.json()
+                                let myJson = await response.json();
                                 selectbox.value = myJson.huis.id
                             }
-                        })
+                        });
+                    }
                 }
-            }
+
         })
 }
 
@@ -201,33 +219,14 @@ function slaapplekToevoegen(event) {
         } )
 }
 
-
-
-function uitloggen(){
-    window.sessionStorage.removeItem('JWT');
-    window.location.href = 'index.html'
-}
-
-
-
-/*function huisEnDatum(){
-    fetch("/api/huis/{id}/{datum", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
-        .then(response => response.json())
-        .then(function (myJson){
-
-        })
-
-}*/
-
-
 document.addEventListener("DOMContentLoaded", () => {
-    let datumWeek = new Date()
-    let monthYear = datumWeek.yyyymm()
+    let datumWeek = new Date();
+    let monthYear = datumWeek.yyyymm();
     for (let i = 0; i < 8; i++) {
-        let day = datumWeek.getDate() + i
-        day = (day>9 ? '' : '0') + day
+        let day = datumWeek.getDate() + i;
+        day = (day>9 ? '' : '0') + day;
 
-        let table = document.querySelector('#slaapplekkenTable tbody')
+        let table = document.querySelector('#slaapplekkenTable tbody');
         table.innerHTML += '<tr>' +
             '                    <form id="slaapplek-' + i + '">' +
             '                        <th><input type="date" id="slaapplek-' + i + '" name="datum" value="' + monthYear + '-' + day + '" disabled></th>' +
@@ -236,18 +235,22 @@ document.addEventListener("DOMContentLoaded", () => {
             '                </tr>'
     }
 
-    let selectSlaapplekken = document.querySelectorAll('select[id^=slaapplek-]')
+    let selectSlaapplekken = document.querySelectorAll('select[id^=slaapplek-]');
 
     for (selectSlaapplek of selectSlaapplekken) {
         selectSlaapplek.addEventListener("change", slaapplekToevoegen)
     }
 
     laadHuizen();
+/*    document.querySelector("#exitButton").addEventListener("click", function () {
+        closePopup("HuisToevoegen");
+    });*/
     document.querySelector("#addHuis").addEventListener("click", function () {
         openPopup("HuisToevoegen");
     });
     document.querySelector("#nieuweStudent").addEventListener("click", function () {
         openPopup("StudentToevoegen");
+
     });
     document.querySelector("#studentPop").addEventListener("click", function (){
         studentInfo();

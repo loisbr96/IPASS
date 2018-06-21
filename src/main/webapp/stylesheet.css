@@ -2,7 +2,7 @@
     #frame{
         display: grid;
     }
-    .navigatie  {grid-column: 1/3;  grid-row: 1; height: 10vh;}
+    .navigatie {grid-column: 1/3;  grid-row: 1; /*height: 10vh;*/}
     .huis       {grid-column: 2;     grid-row: 2;}
     .slaapplek  {grid-column: 1;     grid-row: 2;}
 
@@ -28,11 +28,25 @@
 
 body{
     background: floralwhite ; /*bright white*/
+    margin: 0 ;
     font-family: Arial, Arial, SansSerif;
-    padding: 0;
 }
 
 .button{
+    background: #a9a9a9; /*bright white*/
+    border: 1px solid #000000; /*black*/
+    border-radius: 4px;
+    color: #000000; /*black*/
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    float: right;
+}
+.exitButton{
+    float: right;
     background: #a9a9a9; /*bright white*/
     border: 1px solid #000000; /*black*/
     border-radius: 4px;
@@ -43,17 +57,96 @@ body{
     padding: 5px 10px;
     text-align: center;
 }
+.huis{
+    background: #789440; /*Green*/
+    width: 39vw;
+    margin: 2vh 1vw 2vh 3vw;
+    padding: 2vh 3vw 2vh 3vw;
+    border: 2px solid #a9a9a9; /*Darkgrey*/
+    /*text-align: center;*/
+}
+#addHuis{
+    float: right;
+}
+#deleteHuis{
+    float: right;
+}
+.slaapplek{
+    background: #789440; /*Green*/
+    width: 39vw;
+    margin: 2vh 1vw 2vh 3vw;
+    padding: 2vh 3vw 2vh 3vw;
+    border: 2px solid #a9a9a9; /*Darkgrey*/
+    /*text-align: center;*/
+}
+.navigatie{
+    background: #789440; /*Green*/
+    float: right;
+    width: 100vw;
+    height: 12vh;
 
-#logoImage{
-    float: left;
-    height: 5vh;
-    width: 5vw;
 }
 
-#noImage{
+#navigatieRechts{
+    background: #789440; /*Green*/
     float: right;
+    width: 49vw;
+    height: 12vh;
+}
+
+#navigatieLinks{
+    background: #789440; /*Green*/
+    float: left;
+    width: 49vw;
+    height: 12vh;
+}
+
+/*#logoImage{
+    float: left;
+    height: 10vh;
+    width: 10vw;
+    border-radius: 5px;
+    margin: 2vh 2vw 2vh 2vw;
+}*/
+
+#home{
+    color: black;
+    cursor: pointer;
+    float: left;
+    text-decoration: none;
+    height: 15vh;
+    width: 30vw;
+    border-radius: 5px;
+    margin: 2vh 2vw 2vh 2vw;
+    padding-left: 3vh;
+}
+div.myButton input{
+    background: transparent url("noImage.png")  no-repeat center top;
+    cursor: pointer;
+    height: 10vh;
+    width: 10vw;
+    border: none;
+    border-radius: 40px;
+}
+
+/*#noImage{
+    width: 100%;
+    height: auto;
+    !*border-radius: 30px;*!
+    !*border: 2px solid black;*!
+}*/
+#studentPop{
+    float: left;
+
+    background-image: url('noImage.png');
+    background-repeat: no-repeat;
+    /*transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    margin: 2vh 2vw 2vh 2vw;*/
     height: 5vh;
     width: 5vw;
+    border-radius: 30px;
 }
 #loginDiv{
     background: #789440; /*Green*/
@@ -65,6 +158,8 @@ body{
 }
 
 #popup-HuisToevoegen{
+    background: floralwhite;
+    border: 2px solid #a9a9a9;
     display: none;
     position: absolute;
     top: 40%;
@@ -75,10 +170,11 @@ body{
     top: 0;
     bottom: 0;
     margin:  auto;
-    border: 4px solid #789440;
     padding: 6px;
 }
 #popup-huisDelete{
+    background: floralwhite;
+    border: 2px solid #a9a9a9;
     display: none;
     position: absolute;
     top: 40%;
@@ -89,11 +185,12 @@ body{
     top: 0;
     bottom: 0;
     margin:  auto;
-    border: 4px solid #789440;
     padding: 6px;
 }
 
 #popup-StudentToevoegen{
+    background: floralwhite;
+    border: 2px solid #a9a9a9;
     display: none;
     position: absolute;
     top: 40%;
@@ -104,17 +201,12 @@ body{
     top: 0;
     bottom: 0;
     margin:  auto;
-    border: 4px solid #789440;
     padding: 6px;
 }
-#huis{
-    float: right;
-}
 
-#slaapplek{
-    float: left;
-}
 #popup-StudentInfo{
+    background: floralwhite;
+    border: 2px solid #a9a9a9;
     display: none;
     position: absolute;
     top: 40%;
@@ -125,7 +217,6 @@ body{
     top: 0;
     bottom: 0;
     margin:  auto;
-    border: 4px solid #789440;
     padding: 6px;
 }
 

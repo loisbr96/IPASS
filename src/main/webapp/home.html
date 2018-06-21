@@ -8,15 +8,16 @@
 <body>
 <div id="frame">
     <div class="navigatie">
-        <a href="home.html">
-            <img src="Logo.jpg" id="logoImage" >
-        </a>
-        Welkom
+        <div id="navigatieLinks">
+            <a href="home.html" id="home"><h1>Studentenhuis systeem</h1></a>
+        </div>
+        <div id="navigatieRechts">
+            <!--<div class="myButton"><INPUT type="submit" name="" value=""></div>-->
+            <button type="submit" id="studentPop"><!--<img src="noImage.png" id="noImage">--></button>
 
-        <button id="studentPop"><img src="noImage.png" id="noImage"></button>
-
-        <button onclick="studentToevoegen()" id="nieuweStudent">Nieuwe student</button>
-        <button onclick="uitloggen()" id="uitloggen">Uitloggen</button>
+            <button class="button" onclick="studentToevoegen()" id="nieuweStudent">Nieuwe student</button><br>
+            <button class="button" onclick="uitloggen()" id="uitloggen">Uitloggen</button>
+        </div>
     </div>
 
     <div class="slaapplek">
@@ -29,19 +30,23 @@
     </div>
 
     <div class="huis">
-        <form>
-            <select class="kiesHuis" name="id"></select>
-            <input type="date" name="datum">
-            <input type="button" value="Vind studenten">
-        </form>
-
-
         <button class="button" id="addHuis"> + </button>
-        <button class="button" id="deleteHuis"> - </button>
+        <button class="button" id="deleteHuis"> - </button><br>
+        <h2>Huis</h2>
+
+        <!--<form>
+            <input type="date" name="datum">
+            <select class="kiesHuis" name="id"></select>
+        </form>-->
+        <table id="huisTable">
+            <tbody>
+            </tbody>
+        </table>
     </div>
 </div>
 
 <div id="popup-huisDelete">
+    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
     <h2>Huis verwijderen</h2>
     <form id="huisVerwijderen">
         <div class="row">
@@ -56,7 +61,9 @@
 </div>
 
 <div id="popup-HuisToevoegen">
+    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
     <h2>Huis toevoegen</h2>
+
     <form id="huisToevoegen">
         <div class="row">
             <div class="col m3">
@@ -79,6 +86,7 @@
 </div>
 
 <div id="popup-StudentToevoegen">
+    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
     <h2>Student toevoegen</h2>
     <form id="studentToevoegen">
         <div class="row">
@@ -95,12 +103,13 @@
                 <input type="text" name="achternaam" id="achternaamInput"><br>
                 <input type="text" name="email" id="emailInput"><br>
                 <input type="password" name="wachtwoord" id="wachtwoordInput"><br>
-                <input type="button" onclick="studentToevoegen()" id="studentToevoegenButton" value="Registreren">
+                <input type="button" class="button" onclick="studentToevoegen()" id="studentToevoegenButton" value="Registreren">
             </div>
         </div>
     </form>
 </div>
 <div id="popup-StudentInfo">
+    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
     <h2>Student info</h2>
     <form id="studentInfo">
         <div class="row">
@@ -117,8 +126,8 @@
                 <input type="text" name="achternaam" id="achternaam"><br>
                 <input type="text" name="email" id="email"><br>
                 <input type="password" name="wachtwoord" id="wachtwoord"><br>
-                <input type="button" onclick="studentWijzig()" id="studentInfoButton" value="Wijzig">
-                <input type="button" onclick="studentDelete()" id="studentDeleteButton" value="Delete">
+                <input type="button" class="button" onclick="studentWijzig()" id="studentInfoButton" value="Wijzig">
+                <input type="button"  class="button" onclick="studentDelete()" id="studentDeleteButton" value="Delete">
             </div>
         </div>
     </form>

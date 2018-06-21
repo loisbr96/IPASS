@@ -29,8 +29,6 @@ public class AuthenticationResource {
         try {
             /*Authenticate de gebruiker tegen de database*/
             StudentService studentService = ServiceProvider.getStudentService();
-            System.out.println(email);
-            System.out.println(DigestUtils.sha256Hex(wachtwoord));
             Student student = studentService.findByEmailAndWachtwoord(email,DigestUtils.sha256Hex(wachtwoord));
 
             if (student == null) { throw new IllegalArgumentException("No student found!"); }
