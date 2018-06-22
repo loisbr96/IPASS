@@ -2,7 +2,7 @@
 <Context>
     <Resource name="jdbc/MysqlDS"
               url="${DB_URL}"
-              driverClassName="con.mysql.jdbc.Driver"
+              driverClassName="com.mysql.jdbc.Driver"
               auth="Container"
               type="javax.sql.DataSource" />
 </Context>
