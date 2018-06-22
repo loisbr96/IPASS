@@ -1,6 +1,17 @@
 if(!sessionStorage.getItem('JWT') && window.location.href.split("/").slice(-1)[0] == 'home.html'){
     window.location.href = 'index.html'
 }
+
+fetch("/api/student", {method: 'GET',  headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
+    .then(response => response.json())
+    .then(function (myJson) {
+        if(myJson.tussenvoegsel == null){
+            document.querySelector("#volledigeNaam").innerText = myJson.voornaam + " " + myJson.achternaam;
+        }else {
+            document.querySelector("#volledigeNaam").innerText = myJson.voornaam + " " + myJson.tussenvoegsel + " " + myJson.achternaam;
+        }
+    });
+
 Date.prototype.yyyymm = function() {
     var mm = this.getMonth() + 1; // getMonth() is zero-based
 
@@ -53,10 +64,16 @@ function studentToevoegen() {
     document.querySelector("#studentToevoegenButton").addEventListener("click", function () {
         let formData = new FormData(document.querySelector("#studentToevoegen"));
         let encData = new URLSearchParams(formData.entries());
-
+        if((document.querySelector("#emailInput").innerText.length <= 1 || document.querySelector("#emailInput").innerText == null) &&
+            (document.querySelector("#wachtwoordInput").innerText.length <= 1 || document.querySelector("#wachtwoordInput").innerText == null)){
+            alert("email en wachtwoord zijn verplicht");
+            return;
+        }
         fetch("/api/student", {method: 'POST', body: encData, headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
             .then(response => {
                 if(response.status == 200){
+                    document.querySelector("#studentToevoegen").reset();
+                    closePopup();
                     alert("Student toegevoegd");
                 } else{
                     alert("Gebruiker bestaat al");
@@ -65,6 +82,11 @@ function studentToevoegen() {
     })
 }
 function studentInfo() {
+    if(document.querySelector("#email").value.length <= 1 ||
+        document.querySelector("#wachtwoord").value.length <= 1){
+        alert("email en wachtwoord zijn verplicht");
+        return; 
+    }
     fetch("/api/student", {method: 'GET',  headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
         .then(response => response.json())
         .then(function (myJson) {
@@ -81,6 +103,11 @@ function studentInfo() {
 }
 
 function studentWijzig() {
+    if(document.querySelector("#email").value.length <= 1 ||
+        document.querySelector("#wachtwoord").value.length <= 1 ){
+        alert("email en wachtwoord zijn verplicht");
+        return;
+    }
     let formData = new FormData(document.querySelector("#studentInfo"));
     let encData = new URLSearchParams(formData.entries());
     fetch("/api/student", {method: 'PUT', body: encData, headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
@@ -100,6 +127,7 @@ function studentDelete() {
     fetch("/api/student", {method: 'DELETE', body: encData, headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
         .then(response =>{
             if(response.status == 200){
+                closePopup();
                 alert("Student verwijderd");
                 window.sessionStorage.removeItem('JWT');
                 window.location.href = 'index.html';
@@ -111,15 +139,50 @@ function studentDelete() {
 }
 
 function huisToevoegen() {
+    if(document.querySelector("#naamInput").value.length <= 1 ||
+        document.querySelector("#huisnummerInput").value.length <= 1 ||
+        document.querySelector("#postcodeInput").value.length <= 1 ){
+        alert("Naam, huisnummer en postcode zijn verplicht");
+        return;
+    }
     let formData = new FormData(document.querySelector("#huisToevoegen"));
     let encData = new URLSearchParams(formData.entries());
 
     fetch("/api/huis", {method: 'POST', body: encData, headers:{ 'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT") }})
         .then(response => {
             if(response.status == 200){
+                document.querySelector("#huisToevoegen").reset()
+                closePopup();
                 alert("Huis is toegevoegd");
             }else {
                 alert("Dit huis bestaat al");
+            }
+        })
+}
+
+function slaapplekkenHuis(event) {
+    let id = event.target.value;
+    let datum = document.querySelector("#datumSlaapplekken").value;
+    if(datum.length <= 1){
+        alert("Voert a.u.b. eerst een datum in");
+    }
+    datum = datum.split('-')[2] + '-' + datum.split('-')[1] + '-' + datum.split('-')[0];
+    fetch("/api/slaapplek/huis/" + id + "/" +  datum, {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
+        .then(response => response.json())
+        .then(function(myJson) {
+            let table = document.querySelector("#huisTable tbody");
+            table.innerHTML = "";
+            if(myJson.length == 0){
+                alert("Geen slaapplekken bekend")
+            }
+            for(slaapplek of myJson){
+                let tv = '';
+                if(slaapplek.student.tussenvoegsel && slaapplek.student.tussenvoegsel.length >= 1){
+                    tv = slaapplek.student.tussenvoegsel;
+                    console.log(tv)
+                }
+
+                table.innerHTML += '<tr><td>' + slaapplek.student.voornaam + '</td><td>' + tv + '</td><td>' + slaapplek.student.achternaam + '</td></tr>'
             }
         })
 }
@@ -130,16 +193,15 @@ function huisDelete() {
     fetch("/api/huis/" + id, {method: 'DELETE', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
         .then(response =>{
             if(response.status == 200){
-                laadHuizenDelete();
+                closePopup();
                 alert("Huis verwijderd");
+                laadHuizenDelete();
                 laadHuizen();
             } else{
                 alert("Huis kan niet worden verwijderd");
             }
         })
 }
-
-
 
 function laadHuizen() {
     fetch("/api/huis", {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
@@ -153,13 +215,11 @@ function laadHuizen() {
                 defaultOpt.value = -1;
                 defaultOpt.text = ' -- selecteer een huis -- ';
                 selectbox.add(defaultOpt);
-                // selectbox.innerHTML += '<option disabled selected value="-1"> -- selecteer een huis -- </option>'
                 for(huis of myJson){
                     let option = document.createElement('option');
                     option.value = huis.id;
                     option.text = huis.naam;
                     selectbox.add(option)
-                    selectbox.innerHTML += '<option value="' + huis.id + '">' + huis.naam + '</option>'
                 }
             }
             select = document.querySelectorAll(".kiesHuis");
@@ -211,7 +271,7 @@ function slaapplekToevoegen(event) {
     fetch("api/slaapplek", {method: 'POST', body: encData, headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
         .then(response =>{
             if(response.status == 200){
-                alert("Slaapplek is toegevoegd");
+                alert("Slaapplek is ingevoerd");
             }else {
                 alert("Deze slaapplek kon niet worden opgeslagen");
             }
@@ -241,9 +301,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     laadHuizen();
-/*    document.querySelector("#exitButton").addEventListener("click", function () {
-        closePopup("HuisToevoegen");
-    });*/
     document.querySelector("#addHuis").addEventListener("click", function () {
         openPopup("HuisToevoegen");
     });
@@ -259,5 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
         laadHuizenDelete();
         openPopup("huisDelete");
     })
+
+    document.querySelector("#huisSlaapplekken").addEventListener("change", slaapplekkenHuis)
 
 });

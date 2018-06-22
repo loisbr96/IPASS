@@ -46,13 +46,14 @@ public class Student {
         return achternaam;
     }
 
-    @JsonIgnore
     public String getVolledigeNaam(){
-        if(tussenvoegsel.equals("")){
-            return voornaam + " " + achternaam;
+        String volledigeNaam;
+        if(tussenvoegsel == null){
+            volledigeNaam = voornaam + " " + achternaam;
         } else{
-            return voornaam + " " + tussenvoegsel + " " + achternaam;
+            volledigeNaam = voornaam + " " + tussenvoegsel + " " + achternaam;
         }
+        return volledigeNaam;
     }
 
     public String getEmail(){

@@ -111,7 +111,13 @@ public class SlaapplekDaoImpl extends mysqlBaseDao implements SlaapplekDao {
     /*Methode om voor een specifieke student en datum de slaapplek te krijgen: */
     @Override
     public Slaapplek findByStudentAndDatum(Student student, String datum) {
-        return selectSlaapplek("SELECT * FROM slaapplek WHERE studentId = " + student.getId() + " AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')").get(0);
+        Slaapplek slaapplek;
+        try{
+            slaapplek = selectSlaapplek("SELECT * FROM slaapplek WHERE studentId = " + student.getId() + " AND datum = STR_TO_DATE('" + datum + "', '%d-%m-%Y')").get(0);
+        }catch (IndexOutOfBoundsException ie){
+            slaapplek = null;
+        }
+        return slaapplek;
     }
 
 }

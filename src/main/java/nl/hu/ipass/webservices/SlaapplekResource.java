@@ -22,7 +22,8 @@ import java.util.Map;
 public class SlaapplekResource {
     SlaapplekService service = ServiceProvider.getSlaapplekService();
 
-    /*De response om een nieuwe slaapplek aan te maken d.m.v. van de save functie*/
+    /*De response om een nieuwe slaapplek aan te maken d.m.v. van de save functie
+    * ook wordt de slaapplek hier geupdate*/
     @POST
     public Response newSlaapplek(@FormParam("datum") String datum,
                                  @FormParam("huis") int huisId,
@@ -35,8 +36,15 @@ public class SlaapplekResource {
         if(huis == null){
             return Response.status(404).build();
         } else{
-            Slaapplek newSlaapplek = service.save(new Slaapplek(datum, huis, student));
-            return Response.ok(newSlaapplek).build();
+            Slaapplek slaapplek = service.findByStudentAndDatum(student,datum );
+            if(slaapplek == null){
+                Slaapplek newSlaapplek = service.save(new Slaapplek(datum, huis, student));
+                return Response.ok(newSlaapplek).build();
+            }else{
+                slaapplek.setHuis(huis);
+                service.update(slaapplek);
+                return Response.ok(slaapplek).build();
+            }
         }
     }
 

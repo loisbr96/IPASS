@@ -3,16 +3,16 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="stylesheet.css">
-    <title>Studentenhuis</title>
+    <title>stedenthuus</title>
 </head>
 <body>
 <div id="frame">
     <div class="navigatie">
         <div id="navigatieLinks">
-            <a href="home.html" id="home"><h1>Studentenhuis systeem</h1></a>
+            <a href="home.html" id="home"><h1>Stedenthuus</h1></a>
         </div>
         <div id="navigatieRechts">
-
+            <label id="volledigeNaam"></label>
             <button type="submit" id="studentPop"><img src="noUser.jpg" id="noUser"></button>
 
             <button class="button" onclick="studentToevoegen()" id="nieuweStudent">Nieuwe student</button><br>
@@ -34,11 +34,18 @@
         <button class="button" id="deleteHuis"> - </button><br>
         <h2>Huis</h2>
 
-        <!--<form>
-            <input type="date" name="datum">
-            <select class="kiesHuis" name="id"></select>
-        </form>-->
+        <form>
+            <input type="date" name="datum" id="datumSlaapplekken">
+            <select class="kiesHuis" name="id" id="huisSlaapplekken"></select>
+        </form>
         <table id="huisTable">
+            <thead>
+                <tr>
+                    <th>Naam:</th>
+
+                </tr>
+            </thead>
+
             <tbody>
             </tbody>
         </table>
@@ -124,8 +131,8 @@
                 <input type="text" name="voornaam" id="voornaam"><br>
                 <input type="text" name="tusenvoegsel" id="tussenvoegsel"><br>
                 <input type="text" name="achternaam" id="achternaam"><br>
-                <input type="text" name="email" id="email"><br>
-                <input type="password" name="wachtwoord" id="wachtwoord"><br>
+                <input type="text" name="email" id="email" required><br>
+                <input type="password" name="wachtwoord" id="wachtwoord" required><br>
                 <input type="button" class="button" onclick="studentWijzig()" id="studentInfoButton" value="Wijzig">
                 <input type="button"  class="button" onclick="studentDelete()" id="studentDeleteButton" value="Delete">
             </div>
