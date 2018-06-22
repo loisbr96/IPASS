@@ -5,7 +5,6 @@
     .navigatie {grid-column: 1/3;  grid-row: 1; /*height: 10vh;*/}
     .huis       {grid-column: 2;     grid-row: 2;}
     .slaapplek  {grid-column: 1;     grid-row: 2;}
-
 }
 .col {
     float: left;
@@ -18,13 +17,6 @@
 .col.m9 {
     width: 75%;
 }
-
-/*#frame{*/
-    /*display: grid;*/
-/*}*/
-/*.navigatie  {grid-column: 1/3;  grid-row: 1; height: 10vh;}*/
-/*.huis       {grid-column: 2;     grid-row: 2;}*/
-/*.slaapplek  {grid-column: 1;     grid-row: 2;}*/
 
 body{
     background: floralwhite ; /*bright white*/
@@ -39,11 +31,11 @@ body{
     color: #000000; /*black*/
     cursor: pointer;
     display: inline-block;
+    float: right;
     font-size: 16px;
     margin: 10px;
     padding: 5px 10px;
     text-align: center;
-    float: right;
 }
 .exitButton{
     float: right;
@@ -59,10 +51,10 @@ body{
 }
 .huis{
     background: #789440; /*Green*/
-    width: 39vw;
-    margin: 2vh 1vw 2vh 3vw;
+    border: 2px solid #a9a9a9;
+    margin: 2vh 3vw 2vh 1vw;
     padding: 2vh 3vw 2vh 3vw;
-    border: 2px solid #a9a9a9; /*Darkgrey*/
+    width: 39vw;
     /*text-align: center;*/
 }
 #addHuis{
@@ -73,151 +65,138 @@ body{
 }
 .slaapplek{
     background: #789440; /*Green*/
-    width: 39vw;
+    border: 2px solid #a9a9a9; /*Darkgrey*/
     margin: 2vh 1vw 2vh 3vw;
     padding: 2vh 3vw 2vh 3vw;
-    border: 2px solid #a9a9a9; /*Darkgrey*/
+    width: 39vw;
     /*text-align: center;*/
 }
 .navigatie{
     background: #789440; /*Green*/
     float: right;
-    width: 100vw;
     height: 12vh;
 
+
+    width: 100vw;
 }
 
 #navigatieRechts{
     background: #789440; /*Green*/
     float: right;
-    width: 49vw;
     height: 12vh;
+    width: 49vw;
 }
 
 #navigatieLinks{
     background: #789440; /*Green*/
     float: left;
-    width: 49vw;
     height: 12vh;
+    width: 49vw;
+
 }
 
-/*#logoImage{
-    float: left;
-    height: 10vh;
-    width: 10vw;
-    border-radius: 5px;
-    margin: 2vh 2vw 2vh 2vw;
-}*/
-
 #home{
+    border-radius: 5px;
     color: black;
     cursor: pointer;
     float: left;
-    text-decoration: none;
     height: 15vh;
+    margin: 2vh 2vw 2vh 3vw;
+
+    text-decoration: none;
     width: 30vw;
-    border-radius: 5px;
-    margin: 2vh 2vw 2vh 2vw;
-    padding-left: 3vh;
-}
-div.myButton input{
-    background: transparent url("noImage.png")  no-repeat center top;
-    cursor: pointer;
-    height: 10vh;
-    width: 10vw;
-    border: none;
-    border-radius: 40px;
 }
 
-/*#noImage{
-    width: 100%;
+#noUser{
+    border: 2px solid black;
+    float: right;
     height: auto;
-    !*border-radius: 30px;*!
-    !*border: 2px solid black;*!
-}*/
+    width: 100%;
+}
 #studentPop{
-    float: left;
-
-    background-image: url('noImage.png');
+    background-color: transparent;
     background-repeat: no-repeat;
-    /*transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: #555;
-    margin: 2vh 2vw 2vh 2vw;*/
+    border: none;
+    cursor: pointer;
+    float: right;
     height: 5vh;
+    margin: 2vh 3vw 2vh 2vw;
     width: 5vw;
-    border-radius: 30px;
+}
+#uitloggen{
+    display: inline;
+    float: right;
+}
+#nieuweStudent{
+    display: inline;
+    float: right;
 }
 #loginDiv{
     background: #789440; /*Green*/
-    width: 300px;
+    border: 2px solid #a9a9a9; /*Darkgrey*/
     height: 300px;
     margin: auto;
-    border: 2px solid #a9a9a9; /*Darkgrey*/
     text-align: center;
+    width: 300px;
 }
 
 #popup-HuisToevoegen{
     background: floralwhite;
     border: 2px solid #a9a9a9;
+    bottom: 0;
     display: none;
-    position: absolute;
-    top: 40%;
-    width: 50vw;
     height: 35vh;
     left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     margin:  auto;
     padding: 6px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50vw;
 }
 #popup-huisDelete{
     background: floralwhite;
     border: 2px solid #a9a9a9;
+    bottom: 0;
     display: none;
-    position: absolute;
-    top: 40%;
-    width: 50vw;
     height: 35vh;
     left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     margin:  auto;
     padding: 6px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50vw;
 }
 
 #popup-StudentToevoegen{
     background: floralwhite;
     border: 2px solid #a9a9a9;
+    bottom: 0;
     display: none;
-    position: absolute;
-    top: 40%;
-    width: 50vw;
     height: 35vh;
     left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     margin:  auto;
     padding: 6px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50vw;
 }
 
 #popup-StudentInfo{
     background: floralwhite;
     border: 2px solid #a9a9a9;
+    bottom: 0;
     display: none;
-    position: absolute;
-    top: 40%;
-    width: 50vw;
     height: 35vh;
     left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     margin:  auto;
     padding: 6px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50vw;
 }
 
 

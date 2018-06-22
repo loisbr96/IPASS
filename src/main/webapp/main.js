@@ -23,9 +23,8 @@ function closePopup() {
     let popups = document.querySelectorAll("div[id^=popup-]");
 
     for (popup of popups) {
-        popup.style.display = 'block'
+        popup.style.display = 'none'
     }
-    document.querySelector("#popup-").style.display = 'none'
 }
 
 function login(){

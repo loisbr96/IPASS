@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/MysqlDS"
+              url="${DB_URL}"
+              driverClassName="con.mysql.jdbc.Driver"
+              auth="Container"
+              type="javax.sql.DataSource" />
+</Context>
