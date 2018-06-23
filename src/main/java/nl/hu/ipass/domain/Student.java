@@ -81,11 +81,13 @@ public class Student {
         this.email = email;
     }
 
+    /*Nieuwe wachtwoord wordt versleuteld d.m.v. SHA256*/
     public void setWachtwoord(String oudWachtwoord, String nieuwWachtwoord){
         this.wachtwoord = DigestUtils.sha256Hex(nieuwWachtwoord);
     }
 
-    /*Methode om te controleren of het wachtwoord correct is:*/
+    /*Methode om te controleren of het wachtwoord correct is:
+    * Hierbij wordt het wachtwoord vergeleken met het versleutelde wachtwoord*/
     public boolean wachtwoordCorrect(String wachtwoord){
         if(this.wachtwoord.equals(DigestUtils.sha256Hex(wachtwoord))){
             return true;

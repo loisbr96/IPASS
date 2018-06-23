@@ -48,7 +48,8 @@ public class StudentResource {
         return service.findById(msc.getId());
     }
 
-    /*Response op de student te updaten d.m.v. meegegeven waarden. */
+    /*Response op de student te updaten d.m.v. meegegeven waarden.
+    * JWT token wordt gebruikt om de achterhalen wie de student is*/
     @PUT
     public Response updateStudent(@Context ContainerRequestContext context,
                                   @FormParam("voornaam") String voornaam,

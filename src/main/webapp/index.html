@@ -11,11 +11,17 @@
         <h2>Welkom!</h2>
         <h4>Login in om verder te gaan.</h4>
         <form id="login">
-            <label>Email:</label>
-            <input type="email" name="email" id="inputEmail" > <br>
-            <label>Wachtwoord:</label>
-            <input type="password" name="wachtwoord" id="inputWachtwoord"><br>
-            <input type="button" class="button" onclick="login()" value="Log in" id="button">
+            <div class="row">
+                <div class="col m3">
+                    <label>Email:</label><br>
+                    <label>Wachtwoord:</label>
+                </div>
+                <div class="col m9">
+                    <input type="email" name="email" id="inputEmail" > <br>
+                    <input type="password" name="wachtwoord" id="inputWachtwoord"><br>
+                    <input type="button" class="button" onclick="login()" value="Log in" id="inlogButton">
+                </div>
+            </div>
         </form>
     </div>
 </div>

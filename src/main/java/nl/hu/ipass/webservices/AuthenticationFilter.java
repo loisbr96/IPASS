@@ -20,7 +20,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException{
         boolean isSecure = requestContext.getSecurityContext().isSecure();
 
-        /*Gebruiker worden behandeld als gast, behalve als er een geldig JWT is gegeven: */
+        /*Gebruiker worden behandeld als gast, behalve als er een geldig JWT is gegeven:
+         * Voor alle functies moet de gebruiker ingelogt zijn */
         MySecurityContext msc = new MySecurityContext("guest", -1, isSecure);
 
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
