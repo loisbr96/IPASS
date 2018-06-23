@@ -13,10 +13,13 @@
         </div>
         <div id="navigatieRechts">
             <label id="volledigeNaam"></label>
+            <div id="buttonsDiv">
+                <button class="naviButton" onclick="studentToevoegen()" id="nieuweStudent">Nieuwe student</button><br>
+                <button class="naviButton" onclick="uitloggen()" id="uitloggen">Uitloggen</button>
+            </div>
             <button type="submit" id="studentPop"><img src="noUser.jpg" id="noUser"></button>
 
-            <button class="button" onclick="studentToevoegen()" id="nieuweStudent">Nieuwe student</button><br>
-            <button class="button" onclick="uitloggen()" id="uitloggen">Uitloggen</button>
+
         </div>
     </div>
 
@@ -30,12 +33,15 @@
     </div>
 
     <div class="huis">
-        <button class="button" id="addHuis"> + </button>
-        <button class="button" id="deleteHuis"> - </button><br>
+        <div id="addDeleteDiv">
+            <button class="addDeleteButton" id="addHuis"> + </button>
+            <button class="addDeleteButton" id="deleteHuis"> - </button>
+        </div>
+
         <h2>Huis</h2>
 
         <form>
-            <input type="date" name="datum" id="datumSlaapplekken">
+            <input class="datum" type="date" name="datum" id="datumSlaapplekken">
             <select class="kiesHuis" name="id" id="huisSlaapplekken"></select>
         </form>
         <table id="huisTable">

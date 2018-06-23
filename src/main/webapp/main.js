@@ -64,8 +64,9 @@ function studentToevoegen() {
     document.querySelector("#studentToevoegenButton").addEventListener("click", function () {
         let formData = new FormData(document.querySelector("#studentToevoegen"));
         let encData = new URLSearchParams(formData.entries());
-        if((document.querySelector("#emailInput").innerText.length <= 1 || document.querySelector("#emailInput").innerText == null) &&
-            (document.querySelector("#wachtwoordInput").innerText.length <= 1 || document.querySelector("#wachtwoordInput").innerText == null)){
+        if(document.querySelector("#emailInput").innerText.length <= 1 ||
+            document.querySelector("#wachtwoordInput").innerText.length <= 1 ){
+
             alert("email en wachtwoord zijn verplicht");
             return;
         }
@@ -85,7 +86,7 @@ function studentInfo() {
     if(document.querySelector("#email").value.length <= 1 ||
         document.querySelector("#wachtwoord").value.length <= 1){
         alert("email en wachtwoord zijn verplicht");
-        return; 
+        return;
     }
     fetch("/api/student", {method: 'GET',  headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
         .then(response => response.json())
@@ -160,33 +161,6 @@ function huisToevoegen() {
         })
 }
 
-function slaapplekkenHuis(event) {
-    let id = event.target.value;
-    let datum = document.querySelector("#datumSlaapplekken").value;
-    if(datum.length <= 1){
-        alert("Voert a.u.b. eerst een datum in");
-    }
-    datum = datum.split('-')[2] + '-' + datum.split('-')[1] + '-' + datum.split('-')[0];
-    fetch("/api/slaapplek/huis/" + id + "/" +  datum, {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
-        .then(response => response.json())
-        .then(function(myJson) {
-            let table = document.querySelector("#huisTable tbody");
-            table.innerHTML = "";
-            if(myJson.length == 0){
-                alert("Geen slaapplekken bekend")
-            }
-            for(slaapplek of myJson){
-                let tv = '';
-                if(slaapplek.student.tussenvoegsel && slaapplek.student.tussenvoegsel.length >= 1){
-                    tv = slaapplek.student.tussenvoegsel;
-                    console.log(tv)
-                }
-
-                table.innerHTML += '<tr><td>' + slaapplek.student.voornaam + '</td><td>' + tv + '</td><td>' + slaapplek.student.achternaam + '</td></tr>'
-            }
-        })
-}
-
 function huisDelete() {
     let id = document.querySelector("#KiesHuisDelete").value
 
@@ -252,6 +226,32 @@ function laadHuizenDelete() {
             }
         })
 }
+function slaapplekkenHuis(event) {
+    let id = event.target.value;
+    let datum = document.querySelector("#datumSlaapplekken").value;
+    if(datum.length <= 1){
+        alert("Voert a.u.b. eerst een datum in");
+    }
+    datum = datum.split('-')[2] + '-' + datum.split('-')[1] + '-' + datum.split('-')[0];
+    fetch("/api/slaapplek/huis/" + id + "/" +  datum, {method: 'GET', headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
+        .then(response => response.json())
+        .then(function(myJson) {
+            let table = document.querySelector("#huisTable tbody");
+            table.innerHTML = "";
+            if(myJson.length == 0){
+                alert("Geen slaapplekken bekend")
+            }
+            for(slaapplek of myJson){
+                let tv = '';
+                if(slaapplek.student.tussenvoegsel && slaapplek.student.tussenvoegsel.length >= 1){
+                    tv = slaapplek.student.tussenvoegsel;
+                    console.log(tv)
+                }
+
+                table.innerHTML += '<tr><td>' + slaapplek.student.voornaam + '</td><td>' + tv + '</td><td>' + slaapplek.student.achternaam + '</td></tr>'
+            }
+        })
+}
 
 function slaapplekToevoegen(event) {
     let datum = document.querySelector('input#' + event.target.id).value;
@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let table = document.querySelector('#slaapplekkenTable tbody');
         table.innerHTML += '<tr>' +
             '                    <form id="slaapplek-' + i + '">' +
-            '                        <th><input type="date" id="slaapplek-' + i + '" name="datum" value="' + monthYear + '-' + day + '" disabled></th>' +
+            '                        <th><input class="datum" type="date" id="slaapplek-' + i + '" name="datum" value="' + monthYear + '-' + day + '" disabled></th>' +
             '                        <th><select class="kiesHuis" id="slaapplek-' + i + '"></select></th>' +
             '                    </form>' +
             '                </tr>'

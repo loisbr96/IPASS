@@ -1,4 +1,4 @@
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 756px) {
     #frame{
         display: grid;
     }
@@ -6,6 +6,15 @@
     .huis       {grid-column: 2;     grid-row: 2;}
     .slaapplek  {grid-column: 1;     grid-row: 2;}
 }
+@media only screen and (max-width: 756px) {
+    #frame{
+        display: grid;
+    }
+    .navigatie {width: 100%;}
+    .huis       {width: 100%;}
+    .slaapplek  {width: 100%}
+}
+
 .col {
     float: left;
 }
@@ -24,24 +33,24 @@ body{
     font-family: Arial, Arial, SansSerif;
 }
 
-.button{
+.addDeleteButton{
     background: #a9a9a9; /*bright white*/
     border: 1px solid #000000; /*black*/
-    border-radius: 4px;
+    border-radius: 2px;
     color: #000000; /*black*/
     cursor: pointer;
     display: inline-block;
-    float: right;
-    font-size: 16px;
-    margin: 10px;
-    padding: 5px 10px;
+    font-size: 28px;
+    height: 4vh;
+    margin: 0.5vh 0.5vw 0.5vh 0.5vw;
     text-align: center;
+    width: 3vw;
 }
 .exitButton{
     float: right;
     background: #a9a9a9; /*bright white*/
     border: 1px solid #000000; /*black*/
-    border-radius: 4px;
+    border-radius: 2px;
     color: #000000; /*black*/
     display: inline-block;
     font-size: 16px;
@@ -49,34 +58,56 @@ body{
     padding: 5px 10px;
     text-align: center;
 }
+.naviButton{
+    background: #a9a9a9; /*bright white*/
+    border: 1px solid #000000; /*black*/
+    border-radius: 2px;
+    color: #000000; /*black*/
+    cursor: pointer;
+    display: inline-block;
+    height: 4vh;
+    font-size: 16px;
+    margin: 0.5vh 1vw 0.5vh 1vw;
+    padding: 1vh 1vw 1vh 1vw;
+    text-align: center;
+    width: 9vw;
+}
 .huis{
     background: #789440; /*Green*/
     border: 2px solid #a9a9a9;
-    margin: 2vh 3vw 2vh 1vw;
+    height: 50vh;
+    margin: 5vh 3vw 2vh 1vw;
     padding: 2vh 3vw 2vh 3vw;
     width: 39vw;
-    /*text-align: center;*/
 }
-#addHuis{
+
+#addDeleteDiv{
     float: right;
+    margin:2vh 2vw 2vh 2vw
 }
-#deleteHuis{
-    float: right;
+.kiesHuis{
+    height: 3.5vh;
+    margin: 0 0.5vw 1vh 0;
+    width: 18.3vw;
 }
+.datum{
+    height: 3vh;
+    margin: 0vh 0.5vw 1vh 0;
+    width: 18vw;
+}
+
 .slaapplek{
     background: #789440; /*Green*/
     border: 2px solid #a9a9a9; /*Darkgrey*/
-    margin: 2vh 1vw 2vh 3vw;
+    height: 50vh;
+    margin: 5vh 1vw 2vh 3vw;
     padding: 2vh 3vw 2vh 3vw;
     width: 39vw;
-    /*text-align: center;*/
 }
 .navigatie{
     background: #789440; /*Green*/
     float: right;
     height: 12vh;
-
-
     width: 100vw;
 }
 
@@ -92,7 +123,6 @@ body{
     float: left;
     height: 12vh;
     width: 49vw;
-
 }
 
 #home{
@@ -100,15 +130,16 @@ body{
     color: black;
     cursor: pointer;
     float: left;
-    height: 15vh;
+    font-family: "MV Boli";
+    font-size: larger;
+    height: 20vh;
     margin: 2vh 2vw 2vh 3vw;
-
     text-decoration: none;
-    width: 30vw;
+    width: 40vw;
 }
 
 #noUser{
-    border: 2px solid black;
+    border: 1px solid black;
     float: right;
     height: auto;
     width: 100%;
@@ -120,24 +151,37 @@ body{
     cursor: pointer;
     float: right;
     height: 5vh;
-    margin: 2vh 3vw 2vh 2vw;
+    margin: 1vh 0 1vh 1vw;
     width: 5vw;
 }
-#uitloggen{
-    display: inline;
-    float: right;
+#volledigeNaam{
+    height: 12vh;
+    float: left;
+    margin: 8vh 0 1vh 1vw;
 }
+#buttonsDiv{
+    float: right;
+    margin-right: 4vw;
+    margin-top: 0.5vh;
+}
+
 #nieuweStudent{
     display: inline;
     float: right;
 }
 #loginDiv{
     background: #789440; /*Green*/
-    border: 2px solid #a9a9a9; /*Darkgrey*/
-    height: 300px;
-    margin: auto;
+    border: 2px solid #a9a9a9;
+    bottom: 0;
+    height: 35vh;
+    left: 0;
+    margin:  auto;
+    padding: 3vh 3vw 3vh 3vw;
+    position: absolute;
+    right: 0;
+    top: 0;
     text-align: center;
-    width: 300px;
+    width: 35vw;
 }
 
 #popup-HuisToevoegen{
@@ -148,11 +192,11 @@ body{
     height: 35vh;
     left: 0;
     margin:  auto;
-    padding: 6px;
+    padding: 3vh 3vw 3vh 3vw;
     position: absolute;
     right: 0;
     top: 0;
-    width: 50vw;
+    width: 35vw;
 }
 #popup-huisDelete{
     background: floralwhite;
@@ -162,11 +206,11 @@ body{
     height: 35vh;
     left: 0;
     margin:  auto;
-    padding: 6px;
+    padding: 3vh 3vw 3vh 3vw;
     position: absolute;
     right: 0;
     top: 0;
-    width: 50vw;
+    width: 35vw;
 }
 
 #popup-StudentToevoegen{
@@ -177,11 +221,11 @@ body{
     height: 35vh;
     left: 0;
     margin:  auto;
-    padding: 6px;
+    padding: 3vh 3vw 3vh 3vw;
     position: absolute;
     right: 0;
     top: 0;
-    width: 50vw;
+    width: 35vw;
 }
 
 #popup-StudentInfo{
@@ -192,11 +236,11 @@ body{
     height: 35vh;
     left: 0;
     margin:  auto;
-    padding: 6px;
+    padding: 3vh 3vw 3vh 3vw;
     position: absolute;
     right: 0;
     top: 0;
-    width: 50vw;
+    width: 35vw;
 }
 
 
