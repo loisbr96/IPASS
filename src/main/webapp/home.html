@@ -19,7 +19,6 @@
             </div>
             <button type="submit" id="studentPop"><img src="noUser.jpg" id="noUser"></button>
 
-
         </div>
     </div>
 
@@ -33,7 +32,7 @@
     </div>
 
     <div class="huis">
-        <div id="addDeleteDiv">
+        <div class="rightButtunsDiv">
             <button class="addDeleteButton" id="addHuis"> + </button>
             <button class="addDeleteButton" id="deleteHuis"> - </button>
         </div>
@@ -48,7 +47,6 @@
             <thead>
                 <tr>
                     <th>Naam:</th>
-
                 </tr>
             </thead>
 
@@ -59,7 +57,9 @@
 </div>
 
 <div id="popup-huisDelete">
-    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    <div class="rightButtunsDiv">
+        <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    </div>
     <h2>Huis verwijderen</h2>
     <form id="huisVerwijderen">
         <div class="row">
@@ -74,9 +74,10 @@
 </div>
 
 <div id="popup-HuisToevoegen">
-    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    <div class="rightButtunsDiv">
+        <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    </div>
     <h2>Huis toevoegen</h2>
-
     <form id="huisToevoegen">
         <div class="row">
             <div class="col m3">
@@ -88,18 +89,20 @@
             </div>
             <div class="col m9">
                 <input type="text" name="naam" id="naamInput"> <br>
-                <input type="text" name="straatnaam" id="straatnaamInput"><br>
+                <input type="text"  name="straatnaam" id="straatnaamInput"><br>
                 <input type="number" name="huisnummer" id="huisnummerInput"><br>
                 <input type="text" name="postcode" id="postcodeInput"><br>
                 <input type="text" name="plaatsnaam" id="plaatsnaamInput"><br>
-                <input type="button" class="button" onclick="huisToevoegen()" value="Huis toevoegen" id="huisButton">
+                <input type="button" onclick="huisToevoegen()" value="Huis toevoegen" id="huisButton">
             </div>
         </div>
     </form>
 </div>
 
 <div id="popup-StudentToevoegen">
-    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    <div class="rightButtunsDiv">
+        <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    </div>
     <h2>Student toevoegen</h2>
     <form id="studentToevoegen">
         <div class="row">
@@ -122,7 +125,9 @@
     </form>
 </div>
 <div id="popup-StudentInfo">
-    <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    <div class="rightButtunsDiv">
+        <button class="exitButton" type="submit" onclick="closePopup()">X</button><br>
+    </div>
     <h2>Student info</h2>
     <form id="studentInfo">
         <div class="row">

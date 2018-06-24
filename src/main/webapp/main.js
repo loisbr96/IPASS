@@ -245,7 +245,6 @@ function slaapplekkenHuis(event) {
                 let tv = '';
                 if(slaapplek.student.tussenvoegsel && slaapplek.student.tussenvoegsel.length >= 1){
                     tv = slaapplek.student.tussenvoegsel;
-                    console.log(tv)
                 }
 
                 table.innerHTML += '<tr><td>' + slaapplek.student.voornaam + '</td><td>' + tv + '</td><td>' + slaapplek.student.achternaam + '</td></tr>'
