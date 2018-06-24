@@ -64,8 +64,8 @@ function studentToevoegen() {
     document.querySelector("#studentToevoegenButton").addEventListener("click", function () {
         let formData = new FormData(document.querySelector("#studentToevoegen"));
         let encData = new URLSearchParams(formData.entries());
-        if(document.querySelector("#emailInput").innerText.length <= 1 ||
-            document.querySelector("#wachtwoordInput").innerText.length <= 1 ){
+        if(document.querySelector("#emailInput").value.length <= 1 ||
+            document.querySelector("#wachtwoordInput").value.length <= 1 ){
 
             alert("email en wachtwoord zijn verplicht");
             return;
@@ -83,11 +83,6 @@ function studentToevoegen() {
     })
 }
 function studentInfo() {
-    if(document.querySelector("#email").value.length <= 1 ||
-        document.querySelector("#wachtwoord").value.length <= 1){
-        alert("email en wachtwoord zijn verplicht");
-        return;
-    }
     fetch("/api/student", {method: 'GET',  headers:{'Authorization': 'Bearer ' + window.sessionStorage.getItem("JWT")}})
         .then(response => response.json())
         .then(function (myJson) {
@@ -155,6 +150,7 @@ function huisToevoegen() {
                 document.querySelector("#huisToevoegen").reset()
                 closePopup();
                 alert("Huis is toegevoegd");
+                laadHuizen();
             }else {
                 alert("Dit huis bestaat al");
             }
