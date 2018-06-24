@@ -274,10 +274,11 @@ function slaapplekToevoegen(event) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    let datumWeek = new Date();
-    let monthYear = datumWeek.yyyymm();
+    let currentDate = new Date();
     for (let i = 0; i < 8; i++) {
-        let day = datumWeek.getDate() + i;
+        let datumWeek = new Date(currentDate.getTime() + 1000*60*60*24*i);
+        let monthYear = datumWeek.yyyymm();
+        let day = datumWeek.getDate();
         day = (day>9 ? '' : '0') + day;
 
         let table = document.querySelector('#slaapplekkenTable tbody');
